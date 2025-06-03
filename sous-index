@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ré(ge)nère - Plateforme d'Économie Circulaire</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f0e6d2">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <style>
+        :root {
+            --primary-color: #e9a87c;
+            --secondary-color: #80cbc4;
+            --background-color: #f0e6d2;
+            --text-color: #555;
+            --card-background: #f9f3e7;
+            --card-border: #ece0c5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background-color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .app-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .app-name svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--secondary-color);
+        }
+        
+        .status {
+            color: green;
+            font-size: 0.8rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+        
+        h2 {
+            color: var(--secondary-color);
+            margin: 30px 0 15px 0;
+            font-weight: normal;
+            font-size: 1.2rem;
+        }
+        
+        form {
+            margin-bottom: 30px;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            background-color: var(--card-background);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #d89163;
+        }
+        
+        .company-card {
+            background-color: var(--card-background);
+            border: 1px solid var(--card-border);
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .company-name {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .company-details {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .company-details span {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="app-name">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 22c3.859 0 7-3.141 7-7s-3.141-7-7-7c-3.859 0-7 3.141-7 7s3.141 7 7 7zm0-12c2.757 0 5 2.243 5 5s-2.243 5-5 5-5-2.243-5-5 2.243-5 5-5zm-1-8v4h2V2h-2zm0 16v4h2v-4h-2zM4.929 7.929l2.828 2.828 1.414-1.414L6.343 6.515 4.929 7.929zm9.9 9.9l2.828 2.828 1.414-1.414-2.828-2.828-1.414 1.414zm-12.728 0l1.414 1.414 2.828-2.828-1.414-1.414-2.828 2.828zm16.97-9.9l-1.414 1.414 2.828 2.828 1.414-1.414-2.828-2.828z"/>
+            </svg>
+            <span>Circular Economy App</span>
+        </div>
+        <div class="status">Fonctionnel</div>
+    </header>
+
+    <!-- Le reste du code HTML reste inchangé -->
+    <!-- ... -->
+</body>
+</html>

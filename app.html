@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ré(GE)nère - Plateforme d'Écosystème Mutualisé</title>
+    <link rel="apple-touch-icon" sizes="192x192" href="LOGO_favicon-192x192.png">
+    <link rel="shortcut icon" href="LOGO_favicon-192x192.png">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("GX0U6Fx-DT8e7v6xo");
+        })();
+    </script>
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #6F795C;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f5f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #6E785B;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+        header h2 {
+            margin: 0;
+            font-weight: normal;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        nav {
+            background-color: #6D785A;
+            color: white;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+        }
+        nav li {
+            padding: 15px 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #E67E35;
+        }
+        /* Sections */
+        section {
+            padding: 50px 0;
+        }
+        section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #6F795C;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        .intro {
+            background-color: #6F795B;
+            color: white;
+        }
+        .intro h2 {
+            color: white;
+        }
+        .intro p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            text-align: center;
+            color: white;
+        }
+        .benefits {
+            background-color: #F7F3E9;
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .benefit-card {
+            background-color: #FFF8F0;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(230,126,53,0.1);
+            transition: transform 0.3s;
+            border-top: 4px solid #E67E35;
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        .benefit-card h3 {
+            color: #6D775A;
+            margin-top: 0;
+        }
+        .how-it-works {
+            background-color: #6D785A;
+        }
+        .how-it-works h2 {
+            color: white;
+        }
+        .steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .step {
+            display: flex;
+            margin-bottom: 40px;
+            align-items: center;
+        }
+        .step-number {
+            background-color: #E67E35;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .step-content h3 {
+            color: white;
+        }
+        .step-content p {
+            color: white;
+        }
+        .registration {
+            background-color: #F7F3E9;
+        }
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #FFF8F0;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(230,126,53,0.15);
+            border: 1px solid #F0D5B8;
+        }
+        .form-field {
+            margin-bottom: 25px;
+        }
+        .form-field label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #6F795C;
+            font-size: 1.1rem;
+        }
+        .form-field input, 
+        .form-field select, 
+        .form-field textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #E0D0B8;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: white;
+            position: relative;
+            transition: border-color 0.3s;
+        }
+        
+        .form-field input:focus, 
+        .form-field select:focus, 
+        .form-field textarea:focus {
+            border-color: #E67E35;
+            outline: none;
+        }
+        
+        /* Style pour les champs avec icône */
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #E67E35;
+            font-weight: bold;
+        }
+        
+        /* Style spécifique pour les menus déroulants */
+        .form-field select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23E67E35' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 15px) center;
+            padding-right: 40px;
+        }
+        
+        .submit-btn {
+            background-color: #E67E35;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: bold;
+        }
+        .submit-btn:hover {
+            background-color: #D96928;
+            transform: scale(1.05);
+        }
+        
+        /* Style pour le bouton Ajouter */
+        .btn-add {
+            background-color: #E67E35;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-add:hover {
+            background-color: #D96928;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tag {
+            background-color: #6D775A;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .tag .remove {
+            margin-left: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #E67E35;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .modality-section {
+            position: relative;
+            padding: 20px;
+            background-color: #F7F3E9;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #E67E35;
+        }
+        
+        .modality-section h3 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            color: #6F795C;
+            margin-bottom: 20px;
+        }
+        
+        .modality-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .modality-col {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 15px;
+        }
+        
+        .modality-title {
+            font-weight: 600;
+            color: #6F795C;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        
+        .modality-select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #E0D0B8;
+            border-radius: 8px;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23E67E35' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 15px) center;
+            padding-right: 40px;
+            background-color: white;
+            transition: border-color 0.3s;
+        }
+        
+        .modality-select:focus {
+            border-color: #E67E35;
+            outline: none;
+        }
+        
+        /* Styles spécifiques pour correspondre à l'image */
+        .category-select {
+            width: 100%;
+            height: 44px;
+            padding: 10px 15px;
+            border: 2px solid #E0D0B8;
+            border-radius: 8px;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23E67E35' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 15px) center;
+            padding-right: 40px;
+            background-color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .category-select:focus {
+            border-color: #E67E35;
+            outline: none;
+        }
+        
+        /* Style pour le dropdown de notification */
+        .notification-select {
+            width: 100%;
+            height: 44px;
+            padding: 10px 15px;
+            border: 2px solid #E0D0B8;
+            border-radius: 8px;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23E67E35' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 15px) center;
+            padding-right: 40px;
+            background-color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .notification-select:focus {
+            border-color: #E67E35;
+            outline: none;
+        }
+        
+        /* Utilitaires */
+        .text-muted {
+            color: #6F795C;
+            font-size: 0.9rem;
+        }
+        
+        /* Notification styles */
+        #notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            z-index: 1001;
+            display: none;
+        }
+        #notification.success {
+            background-color: #E67E35;
+        }
+        #notification.error {
+            background-color: #6E785A;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                flex-direction: column;
+            }
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            .form-container {
+                padding: 20px;
+            }
+            .modality-row {
+                flex-direction: column;
+            }
+            .modality-col {
+                width: 100%;
+            }
+        }
+        /* Ajout pour espacer le texte d'introduction */
+        .intro-text {
+            margin-bottom: 60px;
+        }
+        
+        /* Styles pour les placeholder et textes à l'intérieur des champs */
+        ::placeholder {
+            color: #B0B8A6;
+        }
+        
+        /* Style pour le champ de saisie de l'option "Autre" */
+        .other-input-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .other-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #E0D0B8;
+            border-radius: 8px;
+            margin-right: 10px;
+            transition: border-color 0.3s;
+        }
+        
+        .other-input:focus {
+            border-color: #E67E35;
+            outline: none;
+        }
+        
+        /* Version tag */
+        .version-tag {
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            background-color: rgba(230, 126, 53, 0.9);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            z-index: 1000;
+        }
+
+        #auth-status {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            width: 100%;
+        }
+
+        #auth-status > div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        /* Styles pour les sections de match */
+        .matches {
+            background-color: #F7F3E9;
+        }
+        
+        .match-card {
+            background-color: #FFF8F0;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(230,126,53,0.1);
+            border-top: 4px solid #E67E35;
+            transition: transform 0.3s;
+        }
+        
+        .match-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Style pour la modal de connexion */
+        #loginModal > div {
+            background-color: #FFF8F0;
+            border: 1px solid #F0D5B8;
+        }
+        
+        #loginModal h2 {
+            color: #6F795C !important;
+        }
+        
+        #loginModal input {
+            border: 2px solid #E0D0B8;
+            border-radius: 8px;
+        }
+        
+        #loginModal input:focus {
+            border-color: #E67E35;
+            outline: none;
+        }
+        
+        #loginModal button {
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        #loginModal button:first-child {
+            background-color: #6D785A;
+        }
+        
+        #loginModal button:first-child:hover {
+            background-color: #6F795C;
+        }
+        
+        #loginModal button:last-child {
+            background-color: #E67E35;
+        }
+        
+        #loginModal button:last-child:hover {
+            background-color: #D96928;
+        }
+    </style>
+</head>
+<body>
+    <!-- Version tag -->
+    <div class="version-tag">v2.0</div>
+    
+    <!-- Notification Component -->
+    <div id="notification"></div>
+    
+    <header>
+    <div class="container">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <img src="SPIRAL White logo - no background.png" alt="Logo Ré(GE)nère" style="width: 200px; height: 200px;">
+            <div>
+                <h1>Ré(GE)nère</h1>
+                <h2>Plateforme d'Écosystème Mutualisé</h2>
+            </div>
+        </div>
+        <div id="auth-status">
+            <div style="display: flex; gap: 10px;">
+                <button id="login-button" class="submit-btn">Connexion</button>
+                <button id="register-button" class="submit-btn">Inscription</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    // Fonction pour ouvrir la modal de connexion
+    function openLoginModal() {
+        document.getElementById('loginModal').style.display = 'flex';
+    }
+    // Fonction pour fermer la modal de connexion
+    function closeLoginModal() {
+        document.getElementById('loginModal').style.display = 'none';
+    }
+    // Fonction pour faire défiler jusqu'au formulaire d'inscription
+    function scrollToRegistration() {
+        document.getElementById('registration').scrollIntoView({ behavior: 'smooth' });
+    }
+    // Fonction pour gérer la connexion utilisateur
+    function loginUser() {
+        const email = document.getElementById('login-email').value;
+        
+        if (!email) {
+            showNotification('Veuillez entrer votre email professionnel.', 'error');
+            return;
+        }
+        
+        // Rechercher l'entreprise correspondante dans le localStorage
+        const companies = JSON.parse(localStorage.getItem('regenere_companies') || '[]');
+        const company = companies.find(comp => comp.email === email);
+        
+        if (company) {
+            // Simuler une connexion réussie
+            showNotification('Connexion réussie! Bienvenue ' + company.name, 'success');
+            closeLoginModal();
+            
+            // Mettre à jour l'interface pour montrer que l'utilisateur est connecté
+            document.getElementById('auth-status').innerHTML = `
+                <div style="color: white; text-align: right;">
+                    <div>Connecté en tant que:</div>
+                    <div style="font-weight: bold;">${company.name}</div>
+                    <button class="submit-btn" style="margin-top: 5px;" onclick="logoutUser()">Déconnexion</button>
+                </div>
+            `;
+        } else {
+            showNotification('Email non reconnu. Veuillez vous inscrire.', 'error');
+        }
+    }
+</script>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#benefits">Bénéfices</a></li>
+                <li><a href="#how-it-works">Comment ça marche</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Section introduction principale -->
+    <section id="intro" class="intro">
+        <div class="container">
+            <h2>Créons un écosystème durable. Mutualisons nos ressources !</h2>
+            <p class="intro-text">Ré(GE)nère connecte les entreprises genevoises pour créer des synergies locales, valoriser les déchets et optimiser l'utilisation des ressources dans une démarche d'économie locale.</p>
+        </div>
+    </section>
+    
+    <!-- Section Pourquoi rejoindre -->
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <h2>Pourquoi rejoindre notre écosystème ?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Réseautage local</h3>
+                    <p>Développez votre réseau professionnel en collaborant avec d'autres entreprises genevoises partageant vos valeurs.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Économies significatives</h3>
+                    <p>Réduisez vos coûts d'élimination des déchets et trouvez des ressources à moindre coût auprès d'autres entreprises locales.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Impact environnemental positif</h3>
+                    <p>Contribuez à réduire l'empreinte carbone de votre entreprise en donnant une seconde vie à vos ressources inutilisées.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Image responsable</h3>
+                    <p>Renforcez votre image d'entreprise engagée dans le développement durable et l'économie locale.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Innovation collaborative</h3>
+                    <p>Découvrez de nouvelles façons d'utiliser vos ressources et inspirez-vous des pratiques d'autres entreprises.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Simplicité d'utilisation</h3>
+                    <p>Une plateforme intuitive pour publier vos offres et demandes, et être mis en relation automatiquement avec des correspondances pertinentes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Comment ça marche -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>Comment ça marche</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Inscrivez votre entreprise</h3>
+                        <p>Remplissez le formulaire d'inscription avec les informations de votre entreprise. C'est gratuit et prend moins de 5 minutes.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Publiez vos ressources et besoins</h3>
+                        <p>Indiquez les ressources que vous pouvez offrir (déchets, matériaux, équipements, espaces, compétences) et celles dont vous avez besoin.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Recevez des correspondances</h3>
+                        <p>Notre algorithme identifie automatiquement les entreprises dont les besoins correspondent à vos ressources, et vice-versa.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Collaborez localement</h3>
+                        <p>Entrez en contact avec les entreprises suggérées et établissez des partenariats bénéfiques pour tous, dans une logique d'économie locale.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="registration" class="registration">
+        <div class="container">
+            <h2>Rejoindre l'écosystème</h2>
+            <div class="form-container">
+                <!-- Nom de l'entreprise -->
+                <div class="form-field">
+                    <label for="company-name">Nom de l'entreprise*</label>
+                    <div class="input-with-icon">
+                        <input type="text" id="company-name">
+                        <span class="input-icon">⋮</span>
+                    </div>
+                </div>
+                
+                <!-- Adresse -->
+                <div class="form-field">
+                    <label for="company-address">Adresse*</label>
+                    <div class="input-with-icon">
+                        <input type="text" id="company-address">
+                        <span class="input-icon">⋮</span>
+                    </div>
+                </div>
+                
+                <!-- Code postal -->
+                <div class="form-field">
+                    <label for="company-postal">Code postal*</label>
+                    <div class="input-with-icon">
+                        <input type="text" id="company-postal">
+                        <span class="input-icon">⋮</span>
+                    </div>
+                </div>
+                
+                <!-- Ville -->
+                <div class="form-field">
+                    <label for="company-city">Ville*</label>
+                    <div class="input-with-icon">
+                        <input type="text" id="company-city">
+                        <span class="input-icon">⋮</span>
+                    </div>
+                </div>
+                
+                <!-- Site web -->
+                <div class="form-field">
+                    <label for="company-website">Site web</label>
+                    <input type="url" id="company-website">
+                </div>
+                
+                <!-- Email professionnel -->
+                <div class="form-field">
+                    <label for="company-email">Email professionnel*</label>
+                    <div class="input-with-icon">
+                        <input type="email" id="company-email">
+                        <span class="input-icon">⋮</span>
+                    </div>
+                </div>
+                <!-- Catégorie d'entreprise -->
+<div class="form-field">
+    <label for="company-category">Catégorie d'entreprise*</label>
+    <select id="company-category" class="category-select">
+        <option value="">Sélectionnez votre secteur d'activité</option>
+        <option value="Agriculture">Agriculture & Alimentation</option>
+        <option value="Art">Art, Culture & Événementiel</option>
+        <option value="Commerce">Commerce & Distribution</option>
+        <option value="Communication">Communication & Marketing</option>
+        <option value="Construction">Construction & Immobilier</option>
+        <option value="Éducation">Éducation & Formation</option>
+        <option value="Énergie">Énergie & Environnement</option>
+        <option value="Industrie">Industrie & Fabrication</option>
+        <option value="Numérique">Numérique & Technologie</option>
+        <option value="Santé">Santé & Bien-être</option>
+        <option value="Services">Services aux entreprises</option>
+        <option value="Transport">Transport & Logistique</option>
+        <option value="Tourisme">Tourisme & Hôtellerie</option>
+        <option value="Autre">Autre (préciser)</option>
+    </select>
+    
+    <!-- Container for "Autre" input field for company category -->
+    <div id="company-category-other-container" style="display: none;" class="other-input-container">
+        <input type="text" id="company-category-other-input" class="other-input" placeholder="Précisez votre secteur d'activité">
+        <button class="btn-add" onclick="setCustomCompanyCategory()">Valider</button>
+    </div>
+</div>
+                
+                <!-- Catégories de ressources disponibles -->
+                <div class="form-field">
+                    <label for="resource-category">Catégories de ressources disponibles*</label>
+                    <select id="resource-category" class="category-select">
+                        <option value="">Sélectionnez une catégorie</option>
+                        <!-- Options matérielles -->
+                        <option value="Matières premières">Matières premières</option>
+                        <option value="Déchets recyclables">Déchets recyclables</option>
+                        <option value="Équipements">Équipements & Outils</option>
+                        <option value="Espace">Espace & Locaux</option>
+                        <!-- Options non matérielles -->
+                        <option value="Expertise">Expertise/Conseil</option>
+                        <option value="Formation">Formation/Mentorat</option>
+                        <option value="Compétences numériques">Compétences numériques</option>
+                        <option value="Connaissances sectorielles">Connaissances sectorielles</option>
+                        <option value="Animation">Animation/Facilitation</option>
+                        <option value="Temps">Temps de travail/Personnel</option>
+                        <option value="Bénévolat">Bénévolat/Engagement</option>
+                        <option value="Autre">Autre (préciser)</option>
+                    </select>
+                    <button class="btn-add" onclick="addResourceCategory()">Ajouter</button>
+                    
+                    <!-- Container for "Autre" input field for resources -->
+                    <div id="resource-other-container" style="display: none;" class="other-input-container">
+                        <input type="text" id="resource-other-input" class="other-input" placeholder="Précisez la catégorie">
+                        <button class="btn-add" onclick="addCustomResourceCategory()">Ajouter</button>
+                    </div>
+                    
+                    <div class="tag-container" id="resource-tags">
+                        <!-- Les tags des ressources seront ajoutés ici dynamiquement -->
+                    </div>
+                </div>
+                
+                <!-- Modalités d'échange pour ressources -->
+                <div class="modality-section">
+                    <h3>Modalités d'échange (pour ressources immatérielles)</h3>
+                    
+                    <div>
+                        <div class="modality-title">Fréquence</div>
+                        <select id="resource-frequency" class="modality-select">
+                            <option value="">Sélectionnez</option>
+                            <option value="ponctuelle">Ponctuelle</option>
+                            <option value="régulière">Régulière</option>
+                            <option value="permanente">Permanente</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <div class="modality-title">Mode d'échange</div>
+                        <select id="resource-mode" class="modality-select">
+                            <option value="">Sélectionnez</option>
+                            <option value="présentiel">Présentiel</option>
+                            <option value="distanciel">Distanciel</option>
+                            <option value="mixte">Mixte</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <div class="modality-title">Niveau d'expertise</div>
+                        <select id="resource-expertise" class="modality-select">
+                            <option value="">Sélectionnez</option>
+                            <option value="débutant">Débutant</option>
+                            <option value="intermédiaire">Intermédiaire</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Description des ressources -->
+                <div class="form-field">
+                    <label for="resource-description">Description des ressources disponibles*</label>
+                    <textarea id="resource-description" rows="5" placeholder="Exemples : 2h de conseil en stratégie durable par mois, atelier de méditation hebdomadaire, 15kg de carton recyclé chaque semaine, salle de réunion disponible les vendredis..."></textarea>
+                </div>
+                
+                <!-- Catégories de besoins recherchés -->
+                <div class="form-field">
+                    <label for="needs-category">Catégories de besoins recherchés*</label>
+                    <select id="needs-category" class="category-select">
+                        <option value="">Sélectionnez une catégorie</option>
+                        <!-- Options matérielles -->
+                        <option value="Matières premières">Matières premières</option>
+                        <option value="Déchets recyclables">Déchets recyclables</option>
+                        <option value="Équipements">Équipements & Outils</option>
+                        <option value="Espace">Espace & Locaux</option>
+                        <!-- Options non matérielles -->
+                        <option value="Expertise">Expertise/Conseil</option>
+                        <option value="Formation">Formation/Mentorat</option>
+                        <option value="Compétences numériques">Compétences numériques</option>
+                        <option value="Connaissances sectorielles">Connaissances sectorielles</option>
+                        <option value="Animation">Animation/Facilitation</option>
+                        <option value="Temps">Temps de travail/Personnel</option>
+                        <option value="Bénévolat">Bénévolat/Engagement</option>
+                        <option value="Autre">Autre (préciser)</option>
+                    </select>
+                    <button class="btn-add" onclick="addNeedsCategory()">Ajouter</button>
+                    
+                    <!-- Container for "Autre" input field for needs -->
+                    <div id="needs-other-container" style="display: none;" class="other-input-container">
+                        <input type="text" id="needs-other-input" class="other-input" placeholder="Précisez la catégorie">
+                        <button class="btn-add" onclick="addCustomNeedsCategory()">Ajouter</button>
+                    </div>
+                    
+                    <div class="tag-container" id="needs-tags">
+                        <!-- Les tags des besoins seront ajoutés ici dynamiquement -->
+                    </div>
+                </div>
+                
+                <!-- Modalités d'échange pour besoins -->
+                <div class="modality-section">
+                    <h3>Modalités d'échange (pour besoins immatériels)</h3>
+                    
+                    <div>
+                        <div class="modality-title">Fréquence</div>
+                        <select id="needs-frequency" class="modality-select">
+                            <option value="">Sélectionnez</option>
+                            <option value="ponctuelle">Ponctuelle</option>
+                            <option value="régulière">Régulière</option>
+                            <option value="permanente">Permanente</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <div class="modality-title">Mode d'échange</div>
+                        <select id="needs-mode" class="modality-select">
+                            <option value="">Sélectionnez</option>
+                            <option value="présentiel">Présentiel</option>
+                            <option value="distanciel">Distanciel</option>
+                            <option value="mixte">Mixte</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <div class="modality-title">Niveau d'expertise</div>
+                        <select id="needs-expertise" class="modality-select">
+                            <option value="">Sélectionnez</option>
+                            <option value="débutant">Débutant</option>
+                            <option value="intermédiaire">Intermédiaire</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Description des besoins -->
+                <div class="form-field">
+                    <label for="needs-description">Description des besoins recherchés*</label>
+                    <textarea id="needs-description" rows="5" placeholder="Exemples : Recherche expertise en marketing digital (2h/mois), besoin de palettes en bois, espace de stockage temporaire, formation en comptabilité..."></textarea>
+                </div>
+                
+                <!-- Préférences de notification - Redesign selon l'image -->
+                <div class="form-field">
+                    <label for="notification-pref">Préférences de notification</label>
+                    <select id="notification-pref" class="notification-select">
+                        <option value="all">Toutes les correspondances</option>
+                        <option value="weekly">Résumé hebdomadaire</option>
+                        <option value="important">Correspondances importantes uniquement</option>
+                        <option value="none">Aucune notification</option>
+                    </select>
+                </div>
+                
+                <button class="submit-btn" onclick="registerCompany()">Rejoindre l'écosystème</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- JavaScript pour gérer le formulaire -->
+    <script>
+        // Tableau pour stocker les catégories ajoutées
+        let resourceCategories = [];
+        let needsCategories = [];
+        // Variables pour stocker la catégorie d'entreprise
+let companyCategory = "";
+let isCustomCategory = false;
+
+// Fonction pour gérer l'option "Autre" pour la catégorie d'entreprise
+function setCustomCompanyCategory() {
+    const input = document.getElementById('company-category-other-input');
+    const customCategory = input.value.trim();
+    
+    if (customCategory) {
+        // Sauvegarder la catégorie personnalisée
+        companyCategory = customCategory;
+        isCustomCategory = true;
+        
+        // Ajouter la catégorie à la liste déroulante pour les futurs utilisateurs
+        const select = document.getElementById('company-category');
+        const option = document.createElement('option');
+        option.value = customCategory;
+        option.text = customCategory;
+        
+        // Insérer avant l'option "Autre"
+        const otherOptionIndex = Array.from(select.options).findIndex(opt => opt.value === "Autre");
+        select.add(option, otherOptionIndex);
+        
+        // Sélectionner la nouvelle option
+        select.value = customCategory;
+        
+        // Sauvegarder dans localStorage
+        saveCustomCategory('company_categories', customCategory);
+        
+        // Cacher le champ
+        document.getElementById('company-category-other-container').style.display = 'none';
+        
+        // Afficher une notification
+        showNotification('Catégorie ajoutée avec succès', 'success');
+    }
+}
+
+// Modification de la fonction registerCompany pour inclure la catégorie d'entreprise
+function registerCompany() {
+    const companyName = document.getElementById('company-name').value;
+    const companyAddress = document.getElementById('company-address').value;
+    const companyPostal = document.getElementById('company-postal').value;
+    const companyCity = document.getElementById('company-city').value;
+    const companyWebsite = document.getElementById('company-website').value;
+    const companyEmail = document.getElementById('company-email').value;
+    
+    // Récupérer la catégorie d'entreprise
+    if (!isCustomCategory) {
+        companyCategory = document.getElementById('company-category').value;
+    }
+    
+    // Validation basique des champs obligatoires
+    if (!companyName || !companyAddress || !companyPostal || !companyCity || 
+        !companyEmail || !companyCategory || resourceCategories.length === 0 || 
+        needsCategories.length === 0) {
+        showNotification('Veuillez remplir tous les champs obligatoires.', 'error');
+        return;
+    }
+    
+    // Reste du code de la fonction...
+    // ...
+    
+    // Ajout de la catégorie d'entreprise à l'objet companyData
+    const companyData = {
+        name: companyName,
+        address: companyAddress,
+        postalCode: companyPostal,
+        city: companyCity,
+        website: companyWebsite,
+        email: companyEmail,
+        category: companyCategory, // Nouvelle propriété
+        resources: {
+            categories: resourceCategories,
+            description: document.getElementById('resource-description').value,
+            frequency: document.getElementById('resource-frequency').value,
+            mode: document.getElementById('resource-mode').value,
+            expertise: document.getElementById('resource-expertise').value
+        },
+        needs: {
+            categories: needsCategories,
+            description: document.getElementById('needs-description').value,
+            frequency: document.getElementById('needs-frequency').value,
+            mode: document.getElementById('needs-mode').value,
+            expertise: document.getElementById('needs-expertise').value
+        },
+        notificationPreferences: document.getElementById('notification-pref').value
+    };
+    
+    // Suite du code de la fonction...
+}
+
+// Ajout à l'initialisation pour charger les catégories d'entreprises personnalisées
+document.addEventListener('DOMContentLoaded', function() {
+    // Code existant...
+    
+    // Charger les catégories d'entreprises personnalisées
+    const companyCustomCategories = JSON.parse(localStorage.getItem('regenere_custom_company_categories') || '[]');
+    const companyCategorySelect = document.getElementById('company-category');
+    
+    companyCustomCategories.forEach(category => {
+        if (category && category.trim() !== "") {
+            const option = document.createElement('option');
+            option.value = category;
+            option.text = category;
+            
+            // Insérer juste avant l'option "Autre"
+            const otherIndex = Array.from(companyCategorySelect.options).findIndex(opt => opt.value === "Autre");
+            if (otherIndex > -1) {
+                companyCategorySelect.add(option, otherIndex);
+            } else {
+                companyCategorySelect.add(option);
+            }
+        }
+    });
+    
+    // Gestion de l'option "Autre" pour la catégorie d'entreprise
+    document.getElementById('company-category').addEventListener('change', function() {
+        if (this.value === "Autre") {
+            document.getElementById('company-category-other-container').style.display = 'flex';
+        } else {
+            companyCategory = this.value;
+            isCustomCategory = false;
+        }
+    });
+});
+        
+        // Fonction pour ajouter une catégorie personnalisée pour les ressources
+        function addCustomResourceCategory() {
+            const input = document.getElementById('resource-other-input');
+            const customCategory = input.value.trim();
+            
+            if (customCategory) {
+                // Ajouter la catégorie à la liste déroulante
+                const select = document.getElementById('resource-category');
+                const option = document.createElement('option');
+                option.value = customCategory;
+                option.text = customCategory;
+                
+                // Insérer avant l'option "Autre"
+                const otherOptionIndex = Array.from(select.options).findIndex(opt => opt.value === "Autre");
+                select.add(option, otherOptionIndex);
+                
+                // Sauvegarder dans localStorage pour les futurs utilisateurs
+                saveCustomCategory('resources', customCategory);
+                
+                // Ajouter comme tag sélectionné
+                resourceCategories.push(customCategory);
+                
+                const tagsContainer = document.getElementById('resource-tags');
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = `${customCategory} <span class="remove" onclick="removeResourceCategory('${customCategory}')">&times;</span>`;
+                tagsContainer.appendChild(tag);
+                
+                // Réinitialiser
+                input.value = '';
+                select.value = '';
+                
+                // Cacher le champ
+                document.getElementById('resource-other-container').style.display = 'none';
+            }
+        }
+        
+        // Fonction pour supprimer une catégorie de ressource
+        function removeResourceCategory(value) {
+            const index = resourceCategories.indexOf(value);
+            if (index > -1) {
+                resourceCategories.splice(index, 1);
+            }
+            
+            renderResourceTags();
+        }
+        
+        // Fonction pour afficher les tags de ressources
+        function renderResourceTags() {
+            const tagsContainer = document.getElementById('resource-tags');
+            tagsContainer.innerHTML = '';
+            
+            for (const category of resourceCategories) {
+                const select = document.getElementById('resource-category');
+                const option = Array.from(select.options).find(opt => opt.value === category);
+                if (option) {
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `${option.text} <span class="remove" onclick="removeResourceCategory('${category}')">&times;</span>`;
+                    tagsContainer.appendChild(tag);
+                } else {
+                    // Si l'option n'existe pas (cas d'une catégorie personnalisée)
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `${category} <span class="remove" onclick="removeResourceCategory('${category}')">&times;</span>`;
+                    tagsContainer.appendChild(tag);
+                }
+            }
+        }
+        
+        // Fonction pour ajouter une catégorie de besoins
+        function addNeedsCategory() {
+            const selectElement = document.getElementById('needs-category');
+            const selectedValue = selectElement.value;
+            const selectedText = selectElement.options[selectElement.selectedIndex].text;
+            
+            if (selectedValue === "Autre") {
+                // Afficher le champ de saisie pour l'option "Autre"
+                document.getElementById('needs-other-container').style.display = 'flex';
+                return;
+            }
+            
+            if (selectedValue && !needsCategories.includes(selectedValue)) {
+                needsCategories.push(selectedValue);
+                
+                const tagsContainer = document.getElementById('needs-tags');
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = `${selectedText} <span class="remove" onclick="removeNeedsCategory('${selectedValue}')">&times;</span>`;
+                tagsContainer.appendChild(tag);
+                
+                // Réinitialiser la sélection
+                selectElement.value = '';
+            }
+        }
+
+        // Fonction pour ajouter une catégorie de ressources
+function addResourceCategory() {
+    const selectElement = document.getElementById('resource-category');
+    const selectedValue = selectElement.value;
+    const selectedText = selectElement.options[selectElement.selectedIndex].text;
+    
+    if (selectedValue === "Autre") {
+        // Afficher le champ de saisie pour l'option "Autre"
+        document.getElementById('resource-other-container').style.display = 'flex';
+        return;
+    }
+    
+    if (selectedValue && !resourceCategories.includes(selectedValue)) {
+        resourceCategories.push(selectedValue);
+        
+        const tagsContainer = document.getElementById('resource-tags');
+        const tag = document.createElement('div');
+        tag.className = 'tag';
+        tag.innerHTML = `${selectedText} <span class="remove" onclick="removeResourceCategory('${selectedValue}')">&times;</span>`;
+        tagsContainer.appendChild(tag);
+        
+        // Réinitialiser la sélection
+        selectElement.value = '';
+    }
+}
+        
+        // Fonction pour ajouter une catégorie personnalisée pour les besoins
+        function addCustomNeedsCategory() {
+            const input = document.getElementById('needs-other-input');
+            const customCategory = input.value.trim();
+            
+            if (customCategory) {
+                // Ajouter la catégorie à la liste déroulante
+                const select = document.getElementById('needs-category');
+                const option = document.createElement('option');
+                option.value = customCategory;
+                option.text = customCategory;
+                
+                // Insérer avant l'option "Autre"
+                const otherOptionIndex = Array.from(select.options).findIndex(opt => opt.value === "Autre");
+                select.add(option, otherOptionIndex);
+                
+                // Sauvegarder dans localStorage pour les futurs utilisateurs
+                saveCustomCategory('needs', customCategory);
+                
+                // Ajouter comme tag sélectionné
+                needsCategories.push(customCategory);
+                
+                const tagsContainer = document.getElementById('needs-tags');
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = `${customCategory} <span class="remove" onclick="removeNeedsCategory('${customCategory}')">&times;</span>`;
+                tagsContainer.appendChild(tag);
+                
+                // Réinitialiser
+                input.value = '';
+                select.value = '';
+                
+                // Cacher le champ
+                document.getElementById('needs-other-container').style.display = 'none';
+            }
+        }
+        
+        // Fonction pour sauvegarder les catégories personnalisées
+        function saveCustomCategory(type, category) {
+            const storageKey = `regenere_custom_${type}_categories`;
+            let customCategories = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            
+            if (!customCategories.includes(category)) {
+                customCategories.push(category);
+                localStorage.setItem(storageKey, JSON.stringify(customCategories));
+            }
+        }
+        
+        // Fonction pour charger les catégories personnalisées
+        function loadCustomCategories() {
+            try {
+                // Charger les catégories de ressources
+                const resourceCustomCategories = JSON.parse(localStorage.getItem('regenere_custom_resources_categories') || '[]');
+                const resourceSelect = document.getElementById('resource-category');
+                
+                resourceCustomCategories.forEach(category => {
+                    if (category && category.trim() !== "") {
+                        const option = document.createElement('option');
+                        option.value = category;
+                        option.text = category;
+                        
+                        // Insérer juste avant l'option "Autre"
+                        const otherIndex = Array.from(resourceSelect.options).findIndex(opt => opt.value === "Autre");
+                        if (otherIndex > -1) {
+                            resourceSelect.add(option, otherIndex);
+                        } else {
+                            resourceSelect.add(option);
+                        }
+                    }
+                });
+                
+                // Charger les catégories de besoins
+                const needsCustomCategories = JSON.parse(localStorage.getItem('regenere_custom_needs_categories') || '[]');
+                const needsSelect = document.getElementById('needs-category');
+                
+                needsCustomCategories.forEach(category => {
+                    if (category && category.trim() !== "") {
+                        const option = document.createElement('option');
+                        option.value = category;
+                        option.text = category;
+                        
+                        // Insérer juste avant l'option "Autre"
+                        const otherIndex = Array.from(needsSelect.options).findIndex(opt => opt.value === "Autre");
+                        if (otherIndex > -1) {
+                            needsSelect.add(option, otherIndex);
+                        } else {
+                            needsSelect.add(option);
+                        }
+                    }
+                });
+                
+                console.log("Catégories personnalisées chargées avec succès");
+            } catch (error) {
+                console.error("Erreur lors du chargement des catégories personnalisées:", error);
+            }
+        }
+        
+        // Supprimer une catégorie de besoins
+        function removeNeedsCategory(value) {
+            const index = needsCategories.indexOf(value);
+            if (index > -1) {
+                needsCategories.splice(index, 1);
+            }
+            
+            renderNeedsTags();
+        }
+        
+        // Fonction pour afficher les tags de besoins
+        function renderNeedsTags() {
+            const tagsContainer = document.getElementById('needs-tags');
+            tagsContainer.innerHTML = '';
+            
+            for (const category of needsCategories) {
+                const select = document.getElementById('needs-category');
+                const option = Array.from(select.options).find(opt => opt.value === category);
+                if (option) {
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `${option.text} <span class="remove" onclick="removeNeedsCategory('${category}')">&times;</span>`;
+                    tagsContainer.appendChild(tag);
+                } else {
+                    // Si l'option n'existe pas (cas d'une catégorie personnalisée)
+                    const tag = document.createElement('div');
+                    tag.className = 'tag';
+                    tag.innerHTML = `${category} <span class="remove" onclick="removeNeedsCategory('${category}')">&times;</span>`;
+                    tagsContainer.appendChild(tag);
+                }
+            }
+        }
+        
+        // Fonction pour enregistrer l'entreprise
+        function registerCompany() {
+            const companyName = document.getElementById('company-name').value;
+            const companyAddress = document.getElementById('company-address').value;
+            const companyPostal = document.getElementById('company-postal').value;
+            const companyCity = document.getElementById('company-city').value;
+            const companyWebsite = document.getElementById('company-website').value;
+            const companyEmail = document.getElementById('company-email').value;
+            
+            // Validation basique des champs obligatoires
+            if (!companyName || !companyAddress || !companyPostal || !companyCity || 
+                !companyEmail || resourceCategories.length === 0 || 
+                needsCategories.length === 0) {
+                showNotification('Veuillez remplir tous les champs obligatoires.', 'error');
+                return;
+            }
+            
+            // Récupération des descriptions
+            const resourceDescription = document.getElementById('resource-description').value;
+            const needsDescription = document.getElementById('needs-description').value;
+            
+            if (!resourceDescription || !needsDescription) {
+                showNotification('Veuillez remplir les descriptions des ressources et besoins.', 'error');
+                return;
+            }
+            
+            // Récupération des modalités pour les ressources
+            const resourceFrequency = document.getElementById('resource-frequency').value;
+            const resourceMode = document.getElementById('resource-mode').value;
+            const resourceExpertise = document.getElementById('resource-expertise').value;
+            
+            // Récupération des modalités pour les besoins
+            const needsFrequency = document.getElementById('needs-frequency').value;
+            const needsMode = document.getElementById('needs-mode').value;
+            const needsExpertise = document.getElementById('needs-expertise').value;
+            
+            // Récupération des préférences de notification
+            const notificationPreferences = document.getElementById('notification-pref').value;
+            
+            // Créer un objet avec toutes les données
+            const companyData = {
+                name: companyName,
+                address: companyAddress,
+                postalCode: companyPostal,
+                city: companyCity,
+                website: companyWebsite,
+                email: companyEmail,
+                resources: {
+                    categories: resourceCategories,
+                    description: resourceDescription,
+                    frequency: resourceFrequency,
+                    mode: resourceMode,
+                    expertise: resourceExpertise
+                },
+                needs: {
+                    categories: needsCategories,
+                    description: needsDescription,
+                    frequency: needsFrequency,
+                    mode: needsMode,
+                    expertise: needsExpertise
+                },
+                notificationPreferences: notificationPreferences
+            };
+            
+            // Ici, vous pouvez envoyer les données à votre serveur ou les traiter localement
+            console.log("Données d'entreprise:", companyData);
+            
+            // Simuler une réponse réussie
+            showNotification('Inscription réussie! Bienvenue dans l\'écosystème Ré(GE)nère.', 'success');
+            
+            // EmailJS pour envoyer une notification
+            sendRegistrationEmail(companyData);
+        }
+        
+        // Fonction pour envoyer un email de confirmation d'inscription
+        function sendRegistrationEmail(companyData) {
+            const templateParams = {
+                to_email: companyData.email,
+                to_name: companyData.name,
+                message: `Merci de vous être inscrit à Ré(GE)nère! Nous avons bien reçu vos informations sur vos ressources et besoins.`
+            };
+            
+            emailjs.send('service_n485hr9', 'template_zm00bwr', templateParams)
+                .then(function(response) {
+                    console.log('Email envoyé!', response.status, response.text);
+                }, function(error) {
+                    console.log('Erreur lors de l\'envoi de l\'email...', error);
+                });
+        }
+        
+        // Fonction pour afficher une notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = type;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Initialisation des fonctionnalités au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCustomCategories();
+            
+            // Gestion des changements de sélection pour l'option "Autre"
+            document.getElementById('resource-category').addEventListener('change', function() {
+                if (this.value === "Autre") {
+                    document.getElementById('resource-other-container').style.display = 'flex';
+                }
+            });
+            
+            document.getElementById('needs-category').addEventListener('change', function() {
+                if (this.value === "Autre") {
+                    document.getElementById('needs-other-container').style.display = 'flex';
+                }
+            });
+        });
+    </script>
+    
+<!-- Script pour la fonctionnalité de match -->
+<script>
+// Structure pour stocker des entreprises et des matchs
+let companies = [];
+let matches = [];
+
+// Fonction pour initialiser des données de test
+function initTestData() {
+  // Vérifier si des données existent déjà en localStorage
+  const storedCompanies = localStorage.getItem('regenere_companies');
+  const storedMatches = localStorage.getItem('regenere_matches');
+  
+  if (storedCompanies) {
+    companies = JSON.parse(storedCompanies);
+  } else {
+    // Créer quelques entreprises de test si aucune n'existe
+    companies = [
+      {
+        id: 1,
+        name: "EcoDesign SA",
+        email: "contact@ecodesign.ch",
+        address: "15 Rue du Rhône",
+        postalCode: "1204",
+        city: "Genève",
+        website: "www.ecodesign.ch",
+        resources: {
+          categories: ["Déchets recyclables", "Expertise"],
+          description: "30kg de carton recyclé par semaine, 5h de conseil en écoconception par mois",
+          frequency: "régulière",
+          mode: "présentiel",
+          expertise: "expert"
+        },
+        needs: {
+          categories: ["Espace", "Formation"],
+          description: "Recherche espace de stockage temporaire (20m²), formation en marketing digital",
+          frequency: "ponctuelle",
+          mode: "mixte",
+          expertise: "débutant"
+        },
+        notificationPreferences: "all"
+      },
+      {
+        id: 2,
+        name: "BureauFlex SARL",
+        email: "info@bureauflex.ch",
+        address: "25 Avenue de la Gare",
+        postalCode: "1201",
+        city: "Genève",
+        website: "www.bureauflex.ch",
+        resources: {
+          categories: ["Espace", "Équipements"],
+          description: "Salle de réunion disponible les mardis et jeudis, matériel informatique à partager",
+          frequency: "régulière",
+          mode: "présentiel",
+          expertise: "intermédiaire"
+        },
+        needs: {
+          categories: ["Expertise", "Déchets recyclables"],
+          description: "Besoin de conseil juridique, recherche solution pour recyclage de mobilier",
+          frequency: "ponctuelle",
+          mode: "mixte",
+          expertise: "expert"
+        },
+        notificationPreferences: "weekly"
+      },
+      {
+        id: 3,
+        name: "FormaPro Genève",
+        email: "contact@formapro.ch",
+        address: "8 Rue de Carouge",
+        postalCode: "1205",
+        city: "Genève",
+        website: "www.formapro.ch",
+        resources: {
+          categories: ["Formation", "Compétences numériques"],
+          description: "Offre 10h de formation en marketing digital par mois, développement d'outils numériques",
+          frequency: "régulière",
+          mode: "distanciel",
+          expertise: "expert"
+        },
+        needs: {
+          categories: ["Espace", "Matières premières"],
+          description: "Recherche local pour ateliers (capacité 15 personnes), matériel de bureau",
+          frequency: "régulière",
+          mode: "présentiel",
+          expertise: "intermédiaire"
+        },
+        notificationPreferences: "important"
+      }
+    ];
+    localStorage.setItem('regenere_companies', JSON.stringify(companies));
+  }
+  
+  if (storedMatches) {
+    matches = JSON.parse(storedMatches);
+  } else {
+    matches = [];
+    localStorage.setItem('regenere_matches', JSON.stringify(matches));
+  }
+}
+
+// Fonction pour trouver des matchs potentiels
+function findMatches() {
+  let newMatches = [];
+  
+  // Pour chaque paire d'entreprises
+  for (let i = 0; i < companies.length; i++) {
+    for (let j = i + 1; j < companies.length; j++) {
+      // Vérifier les matchs dans les deux directions
+      const matches1 = findMatchBetweenCompanies(companies[i], companies[j]);
+      const matches2 = findMatchBetweenCompanies(companies[j], companies[i]);
+      
+      newMatches = [...newMatches, ...matches1, ...matches2];
+    }
+  }
+  
+  // Filtrer pour éliminer les doublons et les matchs déjà existants
+  const uniqueNewMatches = newMatches.filter((match, index, self) => 
+    index === self.findIndex(m => 
+      m.provider.id === match.provider.id && 
+      m.receiver.id === match.receiver.id &&
+      m.resourceCategory === match.resourceCategory
+    )
+  );
+  
+  // Filtrer pour ne garder que les matchs qui n'existent pas déjà
+  const actuallyNewMatches = uniqueNewMatches.filter(newMatch => 
+    !matches.some(existingMatch => 
+      existingMatch.provider.id === newMatch.provider.id &&
+      existingMatch.receiver.id === newMatch.receiver.id &&
+      existingMatch.resourceCategory === newMatch.resourceCategory
+    )
+  );
+  
+  // Ajouter la date aux nouveaux matchs
+  actuallyNewMatches.forEach(match => {
+    match.date = new Date().toISOString();
+    match.id = Date.now() + Math.floor(Math.random() * 1000);
+  });
+  
+  // Ajouter les nouveaux matchs à la liste existante
+  matches = [...matches, ...actuallyNewMatches];
+  
+  // Sauvegarder dans localStorage
+  localStorage.setItem('regenere_matches', JSON.stringify(matches));
+  
+  return actuallyNewMatches;
+}
+
+// Fonction pour trouver les matchs entre deux entreprises spécifiques
+function findMatchBetweenCompanies(provider, receiver) {
+  let foundMatches = [];
+  
+  // Pour chaque catégorie de ressources du fournisseur
+  provider.resources.categories.forEach(resourceCategory => {
+    // Vérifier si cette catégorie correspond à un besoin du receveur
+    if (receiver.needs.categories.includes(resourceCategory)) {
+      foundMatches.push({
+        provider: {
+          id: provider.id,
+          name: provider.name
+        },
+        receiver: {
+          id: receiver.id,
+          name: receiver.name
+        },
+        resourceCategory: resourceCategory,
+        providerDescription: provider.resources.description,
+        receiverDescription: receiver.needs.description
+      });
+    }
+  });
+  
+  return foundMatches;
+}
+
+// Fonction pour récupérer les derniers matchs
+function getLatestMatches(count = 3) {
+  // Trier par date décroissante
+  return [...matches].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, count);
+}
+
+// Fonction pour afficher les matchs sur la page
+function displayMatches() {
+  // Créer un conteneur pour les matchs s'il n'existe pas déjà
+  let matchesSection = document.getElementById('matches-section');
+  if (!matchesSection) {
+    // Créer la section de matchs après la section "Comment ça marche"
+    const howItWorksSection = document.getElementById('how-it-works');
+    
+    matchesSection = document.createElement('section');
+    matchesSection.id = 'matches-section';
+    matchesSection.className = 'matches';
+    matchesSection.style.padding = '50px 0';
+    
+    // Insérer après la section "how-it-works"
+    howItWorksSection.parentNode.insertBefore(matchesSection, howItWorksSection.nextSibling);
+  }
+  
+  // Récupérer les 3 derniers matchs
+  const latestMatches = getLatestMatches(3);
+  
+  // Générer le HTML pour la section de matchs
+  matchesSection.innerHTML = `
+    <div class="container">
+      <h2>Derniers Matchs Réalisés</h2>
+      <p class="text-center" style="margin-bottom: 30px;">Découvrez les dernières synergies créées entre entreprises genevoises.</p>
+      
+      <div class="matches-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        ${latestMatches.length > 0 ? latestMatches.map(match => `
+          <div class="match-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+              <span style="background-color: #E67E35; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Match</span>
+              <span style="color: #6F795C; font-size: 0.9rem;">${new Date(match.date).toLocaleDateString()}</span>
+            </div>
+            <h3 style="margin-top: 0; color: #6F795C; margin-bottom: 15px;">Catégorie: ${match.resourceCategory}</h3>
+            <div style="margin-bottom: 15px;">
+              <div style="font-weight: bold; color: #E67E35;">Fournisseur</div>
+              <div>${match.provider.name}</div>
+            </div>
+            <div style="margin-bottom: 15px;">
+              <div style="font-weight: bold; color: #6D775A;">Receveur</div>
+              <div>${match.receiver.name}</div>
+            </div>
+            <hr style="border: 0; height: 1px; background-color: #E0D0B8; margin: 15px 0;">
+            <div style="font-size: 0.9rem; color: #6F795C;">
+              <div>Ressource: <span style="font-style: italic;">${match.providerDescription.substring(0, 100)}${match.providerDescription.length > 100 ? '...' : ''}</span></div>
+              <div>Besoin: <span style="font-style: italic;">${match.receiverDescription.substring(0, 100)}${match.receiverDescription.length > 100 ? '...' : ''}</span></div>
+            </div>
+          </div>
+        `).join('') : `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 30px; background-color: #FFF8F0; border-radius: 15px; box-shadow: 0 4px 12px rgba(230,126,53,0.1); border-top: 4px solid #E67E35;">
+            <p>Aucun match n'a encore été réalisé. Rejoignez notre écosystème pour créer les premières synergies !</p>
+          </div>
+        `}
+      </div>
+    </div>
+  `;
+}
+
+// Fonction pour afficher une notification de nouveaux matchs
+function showMatchNotification(newMatches) {
+  // Création d'un élément modal pour la notification
+  let modalOverlay = document.createElement('div');
+// Envoyer des emails pour chaque nouvelle correspondance
+  newMatches.forEach(match => {
+    const templateParams = {
+      name: match.receiver.name,
+      your_item: match.receiverDescription,
+      matching_company: match.provider.name,
+      matching_item: match.providerDescription,
+      match_score: 85, // Vous pouvez ajuster ce score selon vos besoins
+      match_id: match.id
+    };
+    
+    emailjs.send('service_n485hr9', 'template_zm00bwr', templateParams)
+      .then(function(response) {
+        console.log('Email de notification envoyé!', response.status, response.text);
+      }, function(error) {
+        console.log('Erreur lors de l\'envoi de l\'email...', error);
+      });
+  });
+  modalOverlay.style.position = 'fixed';
+  modalOverlay.style.top = '0';
+  modalOverlay.style.left = '0';
+  modalOverlay.style.width = '100%';
+  modalOverlay.style.height = '100%';
+  modalOverlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+  modalOverlay.style.display = 'flex';
+  modalOverlay.style.justifyContent = 'center';
+  modalOverlay.style.alignItems = 'center';
+  modalOverlay.style.zIndex = '1000';
+  
+  let modalContent = document.createElement('div');
+  modalContent.style.backgroundColor = '#FFF8F0';
+  modalContent.style.padding = '30px';
+  modalContent.style.borderRadius = '15px';
+  modalContent.style.maxWidth = '600px';
+  modalContent.style.width = '90%';
+  modalContent.style.maxHeight = '80vh';
+  modalContent.style.overflow = 'auto';
+  modalContent.style.border = '1px solid #F0D5B8';
+  
+  // Titre et contenu
+  modalContent.innerHTML = `
+    <h2 style="color: #E67E35; margin-top: 0;">Nouveaux matchs trouvés! 🎉</h2>
+    <p style="color: #6F795C;">Félicitations! Nous avons trouvé ${newMatches.length} nouveau${newMatches.length > 1 ? 'x' : ''} match${newMatches.length > 1 ? 's' : ''} entre entreprises:</p>
+    
+    <div style="margin-top: 20px;">
+      ${newMatches.map(match => `
+        <div style="border-left: 4px solid #E67E35; padding-left: 15px; margin-bottom: 20px; background-color: #F7F3E9; padding: 15px; border-radius: 8px;">
+          <h3 style="margin-top: 0; color: #6F795C;">Catégorie: ${match.resourceCategory}</h3>
+          <p style="color: #6F795C;"><strong style="color: #E67E35;">${match.provider.name}</strong> peut fournir à <strong style="color: #6D775A;">${match.receiver.name}</strong></p>
+        </div>
+      `).join('')}
+    </div>
+    
+    <button id="close-modal" style="background-color: #E67E35; color: white; border: none; padding: 12px 24px; font-size: 1rem; border-radius: 8px; cursor: pointer; margin-top: 20px; float: right; font-weight: bold;">Fermer</button>
+  `;
+  
+  modalOverlay.appendChild(modalContent);
+  document.body.appendChild(modalOverlay);
+  
+  // Fermer le modal au clic sur le bouton
+  document.getElementById('close-modal').addEventListener('click', function() {
+    document.body.removeChild(modalOverlay);
+  });
+  
+  // Fermer le modal au clic sur l'overlay
+  modalOverlay.addEventListener('click', function(e) {
+    if (e.target === modalOverlay) {
+      document.body.removeChild(modalOverlay);
+    }
+  });
+}
+
+// Fonction pour initialiser la fonctionnalité de match
+function initMatchFunctionality() {
+  // Initialiser les données de test
+  initTestData();
+  
+  // Afficher les matchs existants
+  displayMatches();
+  
+  // Mettre à jour la fonction d'enregistrement pour inclure la recherche de matchs
+  const originalRegisterFunction = window.registerCompany;
+  window.registerCompany = function() {
+    // Appeler la fonction d'origine
+    if (typeof originalRegisterFunction === 'function') {
+      originalRegisterFunction();
+    }
+    
+    // Récupérer les données du formulaire pour créer une nouvelle entreprise
+    const companyName = document.getElementById('company-name').value;
+    if (!companyName) return; // Formulaire non valide
+    
+    // Créer un nouvel objet entreprise
+    const newCompany = {
+      id: Date.now(),
+      name: companyName,
+      address: document.getElementById('company-address').value,
+      postalCode: document.getElementById('company-postal').value,
+      city: document.getElementById('company-city').value,
+      website: document.getElementById('company-website').value,
+      email: document.getElementById('company-email').value,
+      resources: {
+        categories: resourceCategories.slice(), // Copier le tableau
+        description: document.getElementById('resource-description').value,
+        frequency: document.getElementById('resource-frequency').value,
+        mode: document.getElementById('resource-mode').value,
+        expertise: document.getElementById('resource-expertise').value
+      },
+      needs: {
+        categories: needsCategories.slice(), // Copier le tableau
+        description: document.getElementById('needs-description').value,
+        frequency: document.getElementById('needs-frequency').value,
+        mode: document.getElementById('needs-mode').value,
+        expertise: document.getElementById('needs-expertise').value
+      },
+      notificationPreferences: document.getElementById('notification-pref').value
+    };
+    
+    // Ajouter la nouvelle entreprise à la liste
+    companies.push(newCompany);
+    localStorage.setItem('regenere_companies', JSON.stringify(companies));
+    
+    // Rechercher des matchs pour la nouvelle entreprise
+    const newMatches = findMatches();
+    if (newMatches.length > 0) {
+      // Afficher une notification avec les nouveaux matchs
+      setTimeout(() => {
+        showMatchNotification(newMatches);
+        displayMatches(); // Mettre à jour l'affichage
+      }, 1000);
+    }
+  };
+}
+
+// Créer des matchs initiaux si nécessaire
+function createInitialMatches() {
+  if (matches.length === 0 && companies.length >= 2) {
+    // Créer au moins un match entre les entreprises existantes
+    const newMatches = findMatches();
+    if (newMatches.length > 0) {
+      displayMatches();
+    }
+  }
+}
+
+// Lancer l'initialisation quand le DOM est chargé
+document.addEventListener('DOMContentLoaded', function() {
+  initMatchFunctionality();
+  createInitialMatches();
+  console.log("Script de matching initialisé");
+});
+// Fonction pour tester l'envoi d'un email de correspondance
+function testMatchEmail() {
+    // Récupérer les données d'entreprises test
+    let companies = JSON.parse(localStorage.getItem('regenere_companies') || '[]');
+    
+    // Vérifier qu'il y a au moins deux entreprises
+    if (companies.length < 2) {
+        alert("Pas assez d'entreprises pour tester. Inscrivez au moins deux entreprises.");
+        return;
+    }
+    
+    // Créer un exemple de correspondance
+    const testMatch = {
+        id: "test-" + Date.now(),
+        provider: {
+            id: companies[0].id,
+            name: companies[0].name
+        },
+        receiver: {
+            id: companies[1].id,
+            name: companies[1].name
+        },
+        resourceCategory: companies[0].resources.categories[0],
+        providerDescription: companies[0].resources.description,
+        receiverDescription: companies[1].needs.description,
+        match_score: 85
+    };
+    
+    // Préparer les paramètres pour le modèle d'email
+    const templateParams = {
+        name: testMatch.receiver.name,
+        your_item: testMatch.receiverDescription,
+        matching_company: testMatch.provider.name,
+        matching_item: testMatch.providerDescription,
+        match_score: testMatch.match_score,
+        match_id: testMatch.id
+    };
+    
+    // Afficher les paramètres dans la console pour vérification
+    console.log("Paramètres d'email:", templateParams);
+    
+    // Envoyer l'email
+    emailjs.send('service_n485hr9', 'template_zm00bwr', templateParams)
+        .then(function(response) {
+            alert('Email de test envoyé! Statut: ' + response.status);
+            console.log('Email envoyé!', response.status, response.text);
+        }, function(error) {
+            alert('Erreur lors de l\'envoi de l\'email: ' + error);
+            console.log('Erreur lors de l\'envoi de l\'email...', error);
+        });
+}
+
+// Fonction pour la déconnexion
+function logoutUser() {
+    document.getElementById('auth-status').innerHTML = `
+        <div style="display: flex; gap: 10px;">
+            <button class="submit-btn" onclick="openLoginModal()">Connexion</button>
+            <button class="submit-btn" onclick="scrollToRegistration()">Inscription</button>
+        </div>
+    `;
+}
+
+// Fermer la modale si l'utilisateur clique en dehors
+window.onclick = function(event) {
+    const modal = document.getElementById('loginModal');
+    if (event.target === modal) {
+        closeLoginModal();
+    }
+}
+
+// Attacher les événements aux boutons après le chargement du DOM
+document.addEventListener('DOMContentLoaded', function() {
+    // Bouton de connexion
+    document.getElementById('login-button').addEventListener('click', function() {
+        openLoginModal();
+    });
+    
+    // Bouton d'inscription
+    document.getElementById('register-button').addEventListener('click', function() {
+        scrollToRegistration();
+    });
+});
+</script>
+</section>
+
+<!-- Modal de connexion -->
+<div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background-color: #FFF8F0; padding: 30px; border-radius: 15px; max-width: 500px; width: 90%; border: 1px solid #F0D5B8;">
+        <h2 style="color: #6F795C; margin-top: 0;">Connexion</h2>
+        <p style="color: #6F795C;">Entrez votre email professionnel pour accéder à votre espace entreprise.</p>
+        
+        <div style="margin-bottom: 20px;">
+            <label for="login-email" style="display: block; margin-bottom: 8px; font-weight: 600; color: #6F795C;">Email professionnel*</label>
+            <input type="email" id="login-email" style="width: 100%; padding: 12px 15px; border: 2px solid #E0D0B8; border-radius: 8px; font-size: 1rem;">
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+            <button onclick="closeLoginModal()" style="background-color: #6D785A; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">Annuler</button>
+            <button onclick="loginUser()" style="background-color: #E67E35; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: bold;">Se connecter</button>
+        </div>
+    </div>
+</div>
+
+<!-- Pied de page -->
+<footer id="contact" style="background-color: #6E785B; color: white; padding: 30px 0; margin-top: 50px;">
+    <div class="container">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+            <div style="margin-bottom: 20px;">
+                <h3 style="margin-top: 0; font-size: 1.4rem; color: #E67E35;">Ré(GE)nère</h3>
+                <p style="margin-bottom: 5px;">Plateforme d'Écosystème Mutualisé</p>
+                <p style="font-size: 0.9rem;">© Association Eclore 2025. Tous droits réservés.</p>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <p style="margin-bottom: 10px; font-weight: bold;">Contact</p>
+                <p style="margin-bottom: 5px;">Email: info[at]eclore-asso.org</p>
+                <p style="margin-bottom: 5px;">Genève, Suisse</p>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <p style="font-size: 0.85rem; max-width: 300px;">Application @Ré(GE)nère 2025 créée par l'Association Eclore dans le cadre de son programme d'économie locale.</p>
+                <!-- Logo Creative Commons -->
+                <div style="margin-top: 10px; text-align: center;">
+                    <img src="./cc-logo.png" alt="Licence Creative Commons" width="60" height="60" />
+                    <p style="font-size: 0.8rem; margin-top: 5px;">Licence Creative Commons</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</footer>
+
+        <script src="app.js"></script>
+</body>
+</html>
