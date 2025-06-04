@@ -10,13 +10,19 @@ function registerCompany() {
     const companyWebsite = document.getElementById('company-website').value;
     const companyEmail = document.getElementById('company-email').value;
 
+    // Champs supplémentaires pour ressources et besoins
+    const companyResourceDescription = document.getElementById('resource-description') ? document.getElementById('resource-description').value : "";
+    const companyNeedsDescription = document.getElementById('needs-description') ? document.getElementById('needs-description').value : "";
+
     const companyData = {
         name: companyName,
         address: companyAddress,
         postalCode: companyPostal,
         city: companyCity,
         website: companyWebsite,
-        email: companyEmail
+        email: companyEmail,
+        resourceDescription: companyResourceDescription,
+        needsDescription: companyNeedsDescription
     };
 
     // 🚀 Envoi des données à Make
@@ -38,7 +44,9 @@ function envoyerDonneesAMake(companyData) {
         "Code postal": companyData.postalCode,
         "Ville": companyData.city,
         "Email": companyData.email,
-        "Site web": companyData.website
+        "Site web": companyData.website,
+        "Description Ressources": companyData.resourceDescription,
+        "Description Besoins": companyData.needsDescription
     };
 
     fetch(webhookUrl, {
@@ -112,4 +120,5 @@ async function fetchAirtableData() {
 document.addEventListener('DOMContentLoaded', () => {
     fetchAirtableData();
 });
+
 
