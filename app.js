@@ -92,24 +92,34 @@ async function fetchAirtableData() {
         }
         container.innerHTML = ''; // Vider le conteneur avant affichage
 
-        data.records.forEach(record => {
-            const fields = record.fields;
-            const card = document.createElement('div');
-            card.className = 'match-card';
+        const grid = document.createElement('div');
+grid.className = 'matches-grid';
 
-            let cardContent = '<h3>Entreprise</h3>';
+data.records.forEach(record => {
+    const fields = record.fields;
+    const card = document.createElement('div');
+    card.className = 'match-card';
 
-            Object.keys(fields).forEach(fieldName => {
-                let value = fields[fieldName];
-                if (Array.isArray(value)) {
-                    value = value.join(', ');
-                }
-                cardContent += `<p><strong>${fieldName} :</strong> ${value}</p>`;
-            });
+    let cardContent = `
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+            <span style="background-color: #E67E35; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Match</span>
+            <span style="color: #6F795C; font-size: 0.9rem;">${new Date(record.createdTime).toLocaleDateString()}</span>
+        </div>
+        <h3 style="margin-top: 0; color: #6F795C; margin-bottom: 15px;">Entreprise: ${fields["Nom de l’entreprise"] || 'N/A'}</h3>
+        <div style="margin-bottom: 15px;">
+            <div style="font-weight: bold; color: #E67E35;">Description Ressources</div>
+            <div>${fields["Description Ressources"] || ''}</div>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <div style="font-weight: bold; color: #6D775A;">Description Besoins</div>
+            <div>${fields["Description Besoins"] || ''}</div>
+        </div>
+    `;
+    card.innerHTML = cardContent;
+    grid.appendChild(card);
+});
 
-            card.innerHTML = cardContent;
-            container.appendChild(card);
-        });
+container.appendChild(grid);
 
     } catch (error) {
         console.error('Erreur lors de la récupération des données Airtable :', error);
