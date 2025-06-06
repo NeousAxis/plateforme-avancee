@@ -563,6 +563,29 @@
         #loginModal button:last-child:hover {
             background-color: #D96928;
         }
+        .matches {
+    background-color: #F7F3E9;
+    padding: 50px 0;
+}
+
+.match-card {
+    background-color: #FFF8F0;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(230,126,53,0.1);
+    border-top: 4px solid #E67E35;
+    transition: transform 0.3s;
+}
+
+.match-card:hover {
+    transform: translateY(-5px);
+}
+
+.matches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
     </style>
 </head>
 <body>
