@@ -1659,22 +1659,16 @@ function getLatestMatches(count = 3) {
 
 // Fonction pour afficher les matchs sur la page
 function displayMatches() {
-  // Créer un conteneur pour les matchs s'il n'existe pas déjà
   let matchesSection = document.getElementById('matches-section');
   if (!matchesSection) {
-    // Créer la section de matchs après la section "Comment ça marche"
     const howItWorksSection = document.getElementById('how-it-works');
-    
     matchesSection = document.createElement('section');
     matchesSection.id = 'matches-section';
     matchesSection.className = 'matches';
     matchesSection.style.padding = '50px 0';
-    
-    // Insérer après la section "how-it-works"
     howItWorksSection.parentNode.insertBefore(matchesSection, howItWorksSection.nextSibling);
   }
-  
-  // Récupérer les 3 derniers matchs
+
   const latestMatches = getLatestMatches(3);
   
   // Générer le HTML pour la section de matchs
