@@ -1703,41 +1703,40 @@ function displayMatches() {
   const latestMatches = getLatestMatches(3);
   
   // Générer le HTML pour la section de matchs
-  matchesSection.innerHTML = `
-    <div class="container">
-      <h2>Derniers Matchs Réalisés</h2>
-      <p class="text-center" style="margin-bottom: 30px;">Découvrez les dernières synergies créées entre entreprises genevoises.</p>
-      
-      <div class="matches-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-        ${latestMatches.length > 0 ? latestMatches.map(match => `
-          <div class="match-card">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-              <span style="background-color: #E67E35; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Match</span>
-              <span style="color: #6F795C; font-size: 0.9rem;">${new Date(match.date).toLocaleDateString()}</span>
-            </div>
-            <h3 style="margin-top: 0; color: #6F795C; margin-bottom: 15px;">Catégorie: ${match.resourceCategory}</h3>
-            <div style="margin-bottom: 15px;">
-              <div style="font-weight: bold; color: #E67E35;">Fournisseur</div>
-              <div>${match.provider.name}</div>
-            </div>
-            <div style="margin-bottom: 15px;">
-              <div style="font-weight: bold; color: #6D775A;">Receveur</div>
-              <div>${match.receiver.name}</div>
-            </div>
-            <hr style="border: 0; height: 1px; background-color: #E0D0B8; margin: 15px 0;">
-            <div style="font-size: 0.9rem; color: #6F795C;">
-              <div>Ressource: <span style="font-style: italic;">${match.providerDescription.substring(0, 100)}${match.providerDescription.length > 100 ? '...' : ''}</span></div>
-              <div>Besoin: <span style="font-style: italic;">${match.receiverDescription.substring(0, 100)}${match.receiverDescription.length > 100 ? '...' : ''}</span></div>
-            </div>
+ matchesSection.innerHTML = `
+  <div class="container">
+    <h2>Derniers Matchs Réalisés</h2>
+    <p class="section-description">Découvrez les dernières synergies créées entre entreprises genevoises.</p>
+    <div class="matches-grid">
+      ${latestMatches.length > 0 ? latestMatches.map(match => `
+        <div class="match-card">
+          <div class="match-header">
+            <span class="match-badge">Match</span>
+            <span class="match-date">${new Date(match.date).toLocaleDateString()}</span>
           </div>
-        `).join('') : `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 30px; background-color: #FFF8F0; border-radius: 15px; box-shadow: 0 4px 12px rgba(230,126,53,0.1); border-top: 4px solid #E67E35;">
-            <p>Aucun match n'a encore été réalisé. Rejoignez notre écosystème pour créer les premières synergies !</p>
+          <h3 class="match-category">Catégorie: ${match.resourceCategory}</h3>
+          <div class="match-section">
+            <div class="match-label">Fournisseur</div>
+            <div>${match.provider.name}</div>
           </div>
-        `}
-      </div>
+          <div class="match-section">
+            <div class="match-label">Receveur</div>
+            <div>${match.receiver.name}</div>
+          </div>
+          <hr>
+          <div class="match-details">
+            <div><strong>Ressource :</strong> <em>${match.providerDescription.substring(0, 100)}${match.providerDescription.length > 100 ? '...' : ''}</em></div>
+            <div><strong>Besoin :</strong> <em>${match.receiverDescription.substring(0, 100)}${match.receiverDescription.length > 100 ? '...' : ''}</em></div>
+          </div>
+        </div>
+      `).join('') : `
+        <div class="match-card no-match">
+          <p>Aucun match n'a encore été réalisé. Rejoignez notre écosystème pour créer les premières synergies !</p>
+        </div>
+      `}
     </div>
-  `;
+  </div>
+`;
 }
 
 // Fonction pour afficher une notification de nouveaux matchs
