@@ -13,7 +13,7 @@
             emailjs.init("GX0U6Fx-DT8e7v6xo");
         })();
     </script>
-  <style>
+    <style>
         /* Styles généraux */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -586,122 +586,14 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
 }
-        .hero {
-  background: linear-gradient(to right, #6F795B, #6F795C);
-  color: white;
-  text-align: center;
-  padding: 100px 20px 80px;
-}
-.hero h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-.hero p {
-  font-size: 1.2rem;
-  max-width: 800px;
-  margin: 0 auto 30px;
-}
-.cta-button {
-  background-color: #E67E35;
-  color: white;
-  padding: 15px 30px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-.cta-button:hover {
-  background-color: #D96928;
-}
-.cta-button:hover {
-  background-color: #D96928;
-}
-        section {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.6s ease-out;
-}
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-      /* Styles Immersion Forêt */
-#immersion-foret {
-    margin: 0;
-    padding: 0;
-}
-
-#immersion-foret .parallax {
-    background-image: url('jaimy-leemburg-3qlX7oBrVrg-unsplash.jpg');
-    min-height: 100vh;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    filter: brightness(0.9);
-}
-
-#immersion-foret .content {
-    background: rgba(255, 255, 255, 0.85);
-    padding: 50px 20px;
-    text-align: center;
-}
-
-#immersion-foret h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    color: #3a405a;
-}
-
-#immersion-foret p {
-    font-size: 1.2rem;
-    color: #685044;
-    max-width: 800px;
-    margin: 20px auto;
-}
-
-#immersion-foret .fade-in {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-    transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-#immersion-foret .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
     </style>
 </head>
-    <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    }, { threshold: 0.2 });
-
-    sections.forEach(section => {
-      observer.observe(section);
-    });
-  });
-</script>
 <body>
     <!-- Version tag -->
     <div class="version-tag">v2.0</div>
     
     <!-- Notification Component -->
     <div id="notification"></div>
-
-    <section class="hero">
-  <div class="container">
-    <h1>Créons un écosystème durable. Mutualisons nos ressources !</h1>
-    <p>Ré(GE)nère connecte les entreprises genevoises pour créer des synergies locales, valoriser les déchets et optimiser l'utilisation des ressources dans une démarche d'économie locale.</p>
-    <a href="#registration" class="cta-button">Rejoindre l'écosystème</a>
-  </div>
-</section>
     
     <header>
     <div class="container">
@@ -720,10 +612,6 @@ section.visible {
         </div>
     </div>
 </header>
-    <!-- Section Immersion Forêt -->
-<section id="immersion-foret">
-    <div class="parallax"></div>
-</section>
 
 <script>
     // Fonction pour ouvrir la modal de connexion
@@ -780,7 +668,15 @@ section.visible {
             </ul>
         </div>
     </nav>
-       
+    
+    <!-- Section introduction principale -->
+    <section id="intro" class="intro">
+        <div class="container">
+            <h2>Créons un écosystème durable. Mutualisons nos ressources !</h2>
+            <p class="intro-text">Ré(GE)nère connecte les entreprises genevoises pour créer des synergies locales, valoriser les déchets et optimiser l'utilisation des ressources dans une démarche d'économie locale.</p>
+        </div>
+    </section>
+    
     <!-- Section Pourquoi rejoindre -->
     <section id="benefits" class="benefits">
         <div class="container">
@@ -2127,17 +2023,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     
 </footer>
-<script>
-    window.addEventListener('scroll', () => {
-        const content = document.querySelector('#immersion-foret .content');
-        const contentTop = content.getBoundingClientRect().top;
-        const screenHeight = window.innerHeight;
 
-        if (contentTop < screenHeight - 100) {
-            content.classList.add('visible');
-        }
-    });
-</script>
         <script src="app.js"></script>
 </body>
 </html>
