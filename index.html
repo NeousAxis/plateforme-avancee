@@ -586,14 +586,74 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
 }
+        .hero {
+  background: linear-gradient(to right, #6F795B, #E67E35);
+  color: white;
+  text-align: center;
+  padding: 100px 20px 80px;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+.hero p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+.cta-button {
+  background-color: #E67E35;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.cta-button:hover {
+  background-color: #D96928;
+}
+        section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+}
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
     </style>
 </head>
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  });
+</script>
 <body>
     <!-- Version tag -->
     <div class="version-tag">v2.0</div>
     
     <!-- Notification Component -->
     <div id="notification"></div>
+
+    <section class="hero">
+  <div class="container">
+    <h1>Mutualisez vos ressources. Transformez votre impact.</h1>
+    <p>Ré(GE)nère connecte les entreprises genevoises pour une économie circulaire et durable.</p>
+    <a href="#registration" class="cta-button">Rejoindre l'écosystème</a>
+  </div>
+</section>
     
     <header>
     <div class="container">
