@@ -625,6 +625,51 @@ section.visible {
   opacity: 1;
   transform: translateY(0);
 }
+      /* Styles Immersion Forêt */
+#immersion-foret {
+    margin: 0;
+    padding: 0;
+}
+
+#immersion-foret .parallax {
+    background-image: url('jaimy-leemburg-3qlX7oBrVrg-unsplash.jpg');
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(0.9);
+}
+
+#immersion-foret .content {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 50px 20px;
+    text-align: center;
+}
+
+#immersion-foret h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #3a405a;
+}
+
+#immersion-foret p {
+    font-size: 1.2rem;
+    color: #685044;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+#immersion-foret .fade-in {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+#immersion-foret .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
     </style>
 </head>
     <script>
@@ -675,6 +720,15 @@ section.visible {
         </div>
     </div>
 </header>
+    <!-- Section Immersion Forêt -->
+<section id="immersion-foret">
+    <div class="parallax"></div>
+    <div class="content fade-in">
+        <h1>Plongez dans la forêt</h1>
+        <p>Découvrez la profondeur et la magie de la nature grâce à une expérience immersive inédite.</p>
+    </div>
+</section>
+
 
 <script>
     // Fonction pour ouvrir la modal de connexion
@@ -2078,7 +2132,17 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     
 </footer>
+<script>
+    window.addEventListener('scroll', () => {
+        const content = document.querySelector('#immersion-foret .content');
+        const contentTop = content.getBoundingClientRect().top;
+        const screenHeight = window.innerHeight;
 
+        if (contentTop < screenHeight - 100) {
+            content.classList.add('visible');
+        }
+    });
+</script>
         <script src="app.js"></script>
 </body>
 </html>
