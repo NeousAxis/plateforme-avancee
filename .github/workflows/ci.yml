@@ -17,6 +17,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
+      - name: Install Node dependencies
+        run: npm install
 
       - name: Run tests (placeholder)
         run: echo "No tests yet. This is a placeholder."
@@ -29,7 +32,7 @@ jobs:
 
       - name: Run AI Function with OpenAI
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_KEY: 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
         run: |
           echo "Lancement de l'appel IA réel"
           desc1="Ceci est une description test."
