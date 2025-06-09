@@ -1,3 +1,5 @@
+v1.0-avant-ia
+
 Ré(ge)nère - Plateforme d'Écosystème Mutualisé
 Description : 
 Ré(ge)nère est une application web progressive (PWA) qui facilite la création et la gestion d'écosystèmes mutualisés entre organisations. Cette plateforme permet aux entreprises, associations et particuliers de partager leurs ressources, compétences et services dans une logique collaborative et durable.
@@ -29,3 +31,6 @@ https://re-ge-nere.app/
 
 Licence
 Projet open-source sous licence CREATIVE COMMONS
+
+Premier commit stable avant IA
+
