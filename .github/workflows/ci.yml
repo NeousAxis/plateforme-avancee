@@ -30,9 +30,11 @@ jobs:
       - name: IA Workflow Status
         run: echo "✅ Le pipeline IA est prêt. Les IA collaboreront manuellement via Copilot et ChatGPT."
       
-      - name: Run AI Function with OpenAI
+      - name: Run AI Function with OpenAI (Node.js)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          node ai/agentIA.js
       
         run: |
           echo "Lancement de l'appel IA réel"
