@@ -29,10 +29,11 @@ jobs:
 
       - name: IA Workflow Status
         run: echo "✅ Le pipeline IA est prêt. Les IA collaboreront manuellement via Copilot et ChatGPT."
-
+      
       - name: Run AI Function with OpenAI
         env:
-          OPENAI_API_KEY: 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
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      
         run: |
           echo "Lancement de l'appel IA réel"
           desc1="Ceci est une description test."
