@@ -1,0 +1,65 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - feature/ai-integration
+  pull_request:
+    branches:
+      - main
+      - feature/ai-integration
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Run tests (placeholder)
+        run: echo "No tests yet. This is a placeholder."
+
+      - name: Lint code (placeholder)
+        run: echo "No linter configured. This is a placeholder."
+
+      - name: IA Workflow Status
+        run: echo "✅ Le pipeline IA est prêt. Les IA collaboreront manuellement via Copilot et ChatGPT."
+
+      - name: Run AI Function with OpenAI
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "Lancement de l'appel IA réel"
+          desc1="Ceci est une description test."
+          desc2="Ceci est une autre description test."
+
+          embedding1=$(curl https://api.openai.com/v1/embeddings \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $OPENAI_API_KEY" \
+            -d "{
+              \"model\": \"text-embedding-ada-002\",
+              \"input\": \"$desc1\"
+            }" | jq '.data[0].embedding')
+
+          embedding2=$(curl https://api.openai.com/v1/embeddings \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $OPENAI_API_KEY" \
+            -d "{
+              \"model\": \"text-embedding-ada-002\",
+              \"input\": \"$desc2\"
+            }" | jq '.data[0].embedding')
+
+          echo "Embedding 1: $embedding1"
+          echo "Embedding 2: $embedding2"
+          echo "⚠️ Calculer la similarité cosinus côté Node.js ou en local (non pris en charge ici pour l'instant)."
