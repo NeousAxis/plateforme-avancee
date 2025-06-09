@@ -33,4 +33,5 @@ Licence
 Projet open-source sous licence CREATIVE COMMONS
 
 Premier commit stable avant IA
+// Test pipeline
 
