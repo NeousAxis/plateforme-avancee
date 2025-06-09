@@ -68,7 +68,10 @@ function envoyerDonneesAMake(companyData) {
         console.error('Erreur lors de l\'envoi des données à Make:', error);
     });
 }
-
+function computeSemanticScore(desc1, desc2) {
+    // Pour l’instant, on simule un score aléatoire
+    return Math.random();
+}
 async function fetchAirtableData() {
     try {
         const response = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/${airtableTableName}`, {
@@ -102,6 +105,12 @@ grid.className = 'matches-grid';
 
 data.records.forEach(record => {
     const fields = record.fields;
+    // 🧸 Ajout d’un score IA simulé pour la ressource et le besoin
+const resourceDescription = fields["Description Ressources"] || '';
+const needsDescription = fields["Description Besoins"] || '';
+const score = computeSemanticScore(resourceDescription, needsDescription);
+console.log("Score IA :", score);
+
     const card = document.createElement('div');
     card.className = 'match-card';
 
