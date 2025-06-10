@@ -13,21 +13,33 @@ const apiKey = process.env.OPENAI_API_KEY;
 const endpoint = 'https://api.openai.com/v1/embeddings';
 const model = 'text-embedding-ada-002';
 
-// Fonction pour obtenir l'embedding d'un texte
+// Fonction pour obtenir l'embedding d'un texte (avec gestion des erreurs détaillées)
 async function getEmbedding(text) {
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      input: text,
-      model
-    })
-  });
-  const data = await response.json();
-  return data.data[0].embedding;
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        input: text,
+        model
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Erreur API OpenAI : ${response.status} - ${errorText}`);
+      throw new Error(`Erreur API OpenAI : ${response.status} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    return data.data[0].embedding;
+  } catch (error) {
+    console.error("Erreur lors de la génération d'embedding :", error);
+    throw new Error(`Erreur lors de la génération d'embedding : ${error.message || error}`);
+  }
 }
 
 // Fonction pour calculer la similarité cosinus
