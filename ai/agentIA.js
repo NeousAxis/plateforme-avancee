@@ -50,7 +50,6 @@ function cosineSimilarity(vecA, vecB) {
   return dotProduct / (normA * normB);
 }
 
-// Endpoint principal pour calculer la similarité
 app.post('/similarity', async (req, res) => {
   const { desc1, desc2 } = req.body;
 
@@ -66,8 +65,10 @@ app.post('/similarity', async (req, res) => {
     const score = cosineSimilarity(embedding1, embedding2);
     res.json({ score });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error computing similarity' });
+    console.error("Erreur dans /similarity :", error);
+    res.status(500).json({
+      error: `Erreur interne lors du calcul de similarité : ${error.message || error}`
+    });
   }
 });
 
