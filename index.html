@@ -1766,9 +1766,8 @@ function createInitialMatches() {
 
 // Lancer l'initialisation quand le DOM est chargé
 document.addEventListener('DOMContentLoaded', function() {
-  initMatchFunctionality();
-  createInitialMatches();
-  console.log("Script de matching initialisé");
+  fetchAirtableData();
+  console.log("Chargement des données Airtable...");
 });
     
 // Fonction pour la déconnexion
