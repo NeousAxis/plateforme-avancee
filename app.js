@@ -34,8 +34,77 @@ function registerCompany() {
     console.log("Données d'entreprise:", companyData);
 
     // Affiche les données Airtable après envoi
-    fetchAirtableData();
+async function fetchAirtableData() {
+    try {
+        const response = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/${airtableTableName}`, {
+            headers: {
+                Authorization: `Bearer ${airtableApiKey}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Données Airtable :', data.records);
+
+        // Sélectionner la section pour afficher les correspondances
+        let container = document.getElementById('matches-section');
+        if (!container) {
+            container = document.createElement('section');
+            container.id = 'matches-section';
+            container.className = 'matches';
+            container.style.padding = '50px 0';
+            document.body.appendChild(container);
+        }
+        container.innerHTML = ''; // Vider avant affichage
+
+        const grid = document.createElement('div');
+        grid.className = 'matches-grid';
+
+        data.records.forEach(record => {
+            const fields = record.fields;
+
+            // Récupérer les correspondances dans le champ "MATCHS"
+            const matches = fields["MATCHS"];
+            if (matches && matches.length > 0) {
+                matches.forEach(matchCategory => {
+                    const card = document.createElement('div');
+                    card.className = 'match-card';
+
+                    let cardContent = `
+                        <div class="match-header">
+                            <span class="match-badge">Match</span>
+                            <span class="match-date">${new Date(record.createdTime).toLocaleDateString()}</span>
+                        </div>
+                        <h3 class="match-category">Catégorie: ${matchCategory}</h3>
+                        <div class="match-section">
+                            <div class="match-label">Fournisseur</div>
+                            <div>${fields["Nom de l'entreprise"] || 'N/A'}</div>
+                        </div>
+                        <div class="match-section">
+                            <div class="match-label">Receveur</div>
+                            <div>N/A</div>
+                        </div>
+                        <hr>
+                        <div class="match-details">
+                            <div><strong>Ressource :</strong> <em>${fields["Description Ressources"] || 'N/A'}</em></div>
+                            <div><strong>Besoin :</strong> <em>${fields["Description Besoins"] || 'N/A'}</em></div>
+                        </div>
+                    `;
+                    card.innerHTML = cardContent;
+                    grid.appendChild(card);
+                });
+            }
+        });
+
+        container.appendChild(grid);
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données Airtable :', error);
+    }
 }
+
 
 function envoyerDonneesAMake(companyData) {
     const webhookUrl = 'https://hook.eu2.make.com/x38i6elzcm3c3fr6u8ps6fqodhrb56t1';
