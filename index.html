@@ -634,28 +634,6 @@
             showNotification('Veuillez entrer votre email professionnel.', 'error');
             return;
         }
-        
-        // Rechercher l'entreprise correspondante dans le localStorage
-        const companies = JSON.parse(localStorage.getItem('regenere_companies') || '[]');
-        const company = companies.find(comp => comp.email === email);
-        
-        if (company) {
-            // Simuler une connexion réussie
-            showNotification('Connexion réussie! Bienvenue ' + company.name, 'success');
-            closeLoginModal();
-            
-            // Mettre à jour l'interface pour montrer que l'utilisateur est connecté
-            document.getElementById('auth-status').innerHTML = `
-                <div style="color: white; text-align: right;">
-                    <div>Connecté en tant que:</div>
-                    <div style="font-weight: bold;">${company.name}</div>
-                    <button class="submit-btn" style="margin-top: 5px;" onclick="logoutUser()">Déconnexion</button>
-                </div>
-            `;
-        } else {
-            showNotification('Email non reconnu. Veuillez vous inscrire.', 'error');
-        }
-    }
 </script>
     
     <nav>
@@ -1505,102 +1483,7 @@ function addResourceCategory() {
 // Structure pour stocker des entreprises et des matchs
 let companies = [];
 let matches = [];
-
-// Fonction pour initialiser des données de test
-function initTestData() {
-  // Vérifier si des données existent déjà en localStorage
-  const storedCompanies = localStorage.getItem('regenere_companies');
-  const storedMatches = localStorage.getItem('regenere_matches');
-  
-  if (storedCompanies) {
-    companies = JSON.parse(storedCompanies);
-  } else {
-    // Créer quelques entreprises de test si aucune n'existe
-    companies = [
-      {
-        id: 1,
-        name: "EcoDesign SA",
-        email: "contact@ecodesign.ch",
-        address: "15 Rue du Rhône",
-        postalCode: "1204",
-        city: "Genève",
-        website: "www.ecodesign.ch",
-        resources: {
-          categories: ["Déchets recyclables", "Expertise"],
-          description: "30kg de carton recyclé par semaine, 5h de conseil en écoconception par mois",
-          frequency: "régulière",
-          mode: "présentiel",
-          expertise: "expert"
-        },
-        needs: {
-          categories: ["Espace", "Formation"],
-          description: "Recherche espace de stockage temporaire (20m²), formation en marketing digital",
-          frequency: "ponctuelle",
-          mode: "mixte",
-          expertise: "débutant"
-        },
-        notificationPreferences: "all"
-      },
-      {
-        id: 2,
-        name: "BureauFlex SARL",
-        email: "info@bureauflex.ch",
-        address: "25 Avenue de la Gare",
-        postalCode: "1201",
-        city: "Genève",
-        website: "www.bureauflex.ch",
-        resources: {
-          categories: ["Espace", "Équipements"],
-          description: "Salle de réunion disponible les mardis et jeudis, matériel informatique à partager",
-          frequency: "régulière",
-          mode: "présentiel",
-          expertise: "intermédiaire"
-        },
-        needs: {
-          categories: ["Expertise", "Déchets recyclables"],
-          description: "Besoin de conseil juridique, recherche solution pour recyclage de mobilier",
-          frequency: "ponctuelle",
-          mode: "mixte",
-          expertise: "expert"
-        },
-        notificationPreferences: "weekly"
-      },
-      {
-        id: 3,
-        name: "FormaPro Genève",
-        email: "contact@formapro.ch",
-        address: "8 Rue de Carouge",
-        postalCode: "1205",
-        city: "Genève",
-        website: "www.formapro.ch",
-        resources: {
-          categories: ["Formation", "Compétences numériques"],
-          description: "Offre 10h de formation en marketing digital par mois, développement d'outils numériques",
-          frequency: "régulière",
-          mode: "distanciel",
-          expertise: "expert"
-        },
-        needs: {
-          categories: ["Espace", "Matières premières"],
-          description: "Recherche local pour ateliers (capacité 15 personnes), matériel de bureau",
-          frequency: "régulière",
-          mode: "présentiel",
-          expertise: "intermédiaire"
-        },
-        notificationPreferences: "important"
-      }
-    ];
-    localStorage.setItem('regenere_companies', JSON.stringify(companies));
-  }
-  
-  if (storedMatches) {
-    matches = JSON.parse(storedMatches);
-  } else {
-    matches = [];
-    localStorage.setItem('regenere_matches', JSON.stringify(matches));
-  }
-}
-
+    
 // Fonction pour trouver des matchs potentiels
 function findMatches() {
   let newMatches = [];
@@ -1642,9 +1525,6 @@ function findMatches() {
   
   // Ajouter les nouveaux matchs à la liste existante
   matches = [...matches, ...actuallyNewMatches];
-  
-  // Sauvegarder dans localStorage
-  localStorage.setItem('regenere_matches', JSON.stringify(matches));
   
   return actuallyNewMatches;
 }
@@ -1861,10 +1741,6 @@ function initMatchFunctionality() {
       notificationPreferences: document.getElementById('notification-pref').value
     };
     
-    // Ajouter la nouvelle entreprise à la liste
-    companies.push(newCompany);
-    localStorage.setItem('regenere_companies', JSON.stringify(companies));
-    
     // Rechercher des matchs pour la nouvelle entreprise
     const newMatches = findMatches();
     if (newMatches.length > 0) {
@@ -1894,58 +1770,7 @@ document.addEventListener('DOMContentLoaded', function() {
   createInitialMatches();
   console.log("Script de matching initialisé");
 });
-// Fonction pour tester l'envoi d'un email de correspondance
-function testMatchEmail() {
-    // Récupérer les données d'entreprises test
-    let companies = JSON.parse(localStorage.getItem('regenere_companies') || '[]');
     
-    // Vérifier qu'il y a au moins deux entreprises
-    if (companies.length < 2) {
-        alert("Pas assez d'entreprises pour tester. Inscrivez au moins deux entreprises.");
-        return;
-    }
-    
-    // Créer un exemple de correspondance
-    const testMatch = {
-        id: "test-" + Date.now(),
-        provider: {
-            id: companies[0].id,
-            name: companies[0].name
-        },
-        receiver: {
-            id: companies[1].id,
-            name: companies[1].name
-        },
-        resourceCategory: companies[0].resources.categories[0],
-        providerDescription: companies[0].resources.description,
-        receiverDescription: companies[1].needs.description,
-        match_score: 85
-    };
-    
-    // Préparer les paramètres pour le modèle d'email
-    const templateParams = {
-        name: testMatch.receiver.name,
-        your_item: testMatch.receiverDescription,
-        matching_company: testMatch.provider.name,
-        matching_item: testMatch.providerDescription,
-        match_score: testMatch.match_score,
-        match_id: testMatch.id
-    };
-    
-    // Afficher les paramètres dans la console pour vérification
-    console.log("Paramètres d'email:", templateParams);
-    
-    // Envoyer l'email
-    emailjs.send('service_n485hr9', 'template_zm00bwr', templateParams)
-        .then(function(response) {
-            alert('Email de test envoyé! Statut: ' + response.status);
-            console.log('Email envoyé!', response.status, response.text);
-        }, function(error) {
-            alert('Erreur lors de l\'envoi de l\'email: ' + error);
-            console.log('Erreur lors de l\'envoi de l\'email...', error);
-        });
-}
-
 // Fonction pour la déconnexion
 function logoutUser() {
     document.getElementById('auth-status').innerHTML = `
