@@ -50,61 +50,76 @@ async function fetchAirtableData() {
         console.log('Données Airtable :', data.records);
 
         // Sélectionner la section pour afficher les correspondances
-        let container = document.getElementById('matches-section');
-        if (!container) {
-            container = document.createElement('section');
-            container.id = 'matches-section';
-            container.className = 'matches';
-            container.style.padding = '50px 0';
-            document.body.appendChild(container);
+        let matchesSection = document.getElementById('matches-section');
+        if (!matchesSection) {
+            matchesSection = document.createElement('section');
+            matchesSection.id = 'matches-section';
+            matchesSection.className = 'matches';
+            matchesSection.style.padding = '50px 0';
+            document.body.appendChild(matchesSection);
         }
-        container.innerHTML = ''; // Vider avant affichage
 
-        const grid = document.createElement('div');
-        grid.className = 'matches-grid';
-
+        // Construire la liste des matchs à partir de Airtable
+        const latestMatches = [];
         data.records.forEach(record => {
             const fields = record.fields;
+            const matchCategories = fields["MATCHS"] || [];
 
-            // Récupérer les correspondances dans le champ "MATCHS"
-            const matches = fields["MATCHS"];
-            if (matches && matches.length > 0) {
-                matches.forEach(matchCategory => {
-                    const card = document.createElement('div');
-                    card.className = 'match-card';
-
-                    let cardContent = `
-                        <div class="match-header">
-                            <span class="match-badge">Match</span>
-                            <span class="match-date">${new Date(record.createdTime).toLocaleDateString()}</span>
-                        </div>
-                        <h3 class="match-category">Catégorie: ${matchCategory}</h3>
-                        <div class="match-section">
-                            <div class="match-label">Fournisseur</div>
-                            <div>${fields["Nom de l'entreprise"] || 'N/A'}</div>
-                        </div>
-                        <div class="match-section">
-                            <div class="match-label">Receveur</div>
-                            <div>N/A</div>
-                        </div>
-                        <hr>
-                        <div class="match-details">
-                            <div><strong>Ressource :</strong> <em>${fields["Description Ressources"] || 'N/A'}</em></div>
-                            <div><strong>Besoin :</strong> <em>${fields["Description Besoins"] || 'N/A'}</em></div>
-                        </div>
-                    `;
-                    card.innerHTML = cardContent;
-                    grid.appendChild(card);
+            matchCategories.forEach(category => {
+                latestMatches.push({
+                    date: record.createdTime,
+                    resourceCategory: category,
+                    provider: { name: fields["Nom de l'entreprise"] || 'N/A' },
+                    receiver: { name: 'N/A' }, // Placeholder
+                    providerDescription: fields["Description Ressources"] || '',
+                    receiverDescription: fields["Description Besoins"] || ''
                 });
-            }
+            });
         });
 
-        container.appendChild(grid);
+        // Afficher les matchs
+        matchesSection.innerHTML = `
+          <div class="container">
+            <h2>Derniers Matchs Réalisés</h2>
+            <p class="text-center" style="margin-bottom: 30px;">Découvrez les dernières synergies créées entre entreprises genevoises.</p>
+            <div class="matches-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+              ${
+                latestMatches.length > 0
+                  ? latestMatches.map(match => `
+                      <div class="match-card" style="background-color: white; border-radius: 8px; padding: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                          <span style="background-color: #2A9D8F; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Match</span>
+                          <span style="color: #6c757d; font-size: 0.9rem;">${new Date(match.date).toLocaleDateString()}</span>
+                        </div>
+                        <h3 style="margin-top: 0; color: #264653; margin-bottom: 15px;">Catégorie: ${match.resourceCategory}</h3>
+                        <div style="margin-bottom: 15px;">
+                          <div style="font-weight: bold; color: #2A9D8F;">Fournisseur</div>
+                          <div>${match.provider.name}</div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                          <div style="font-weight: bold; color: #E76F51;">Receveur</div>
+                          <div>${match.receiver.name}</div>
+                        </div>
+                        <hr style="border: 0; height: 1px; background-color: #e0e0e0; margin: 15px 0;">
+                        <div style="font-size: 0.9rem; color: #333;">
+                          <div>Ressource: <span style="font-style: italic;">${match.providerDescription.substring(0, 100)}${match.providerDescription.length > 100 ? '...' : ''}</span></div>
+                          <div>Besoin: <span style="font-style: italic;">${match.receiverDescription.substring(0, 100)}${match.receiverDescription.length > 100 ? '...' : ''}</span></div>
+                        </div>
+                      </div>
+                    `).join('')
+                  : `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 30px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                      <p>Aucun match n'a encore été réalisé. Rejoignez notre écosystème pour créer les premières synergies !</p>
+                    </div>
+                  `
+              }
+            </div>
+          </div>
+        `;
     } catch (error) {
         console.error('Erreur lors de la récupération des données Airtable :', error);
     }
 }
-
 
 function envoyerDonneesAMake(companyData) {
     const webhookUrl = 'https://hook.eu2.make.com/x38i6elzcm3c3fr6u8ps6fqodhrb56t1';
