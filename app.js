@@ -125,6 +125,8 @@ function envoyerDonneesAMake(companyData) {
         "Description Besoins": companyData.needsDescription
     };
 
+    console.log("📡 Envoi vers Make :", JSON.stringify(dataToSend));
+
     return fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
