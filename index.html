@@ -749,12 +749,14 @@
     
     <section id="matches-section" class="matches"></section>
 
-    <!-- Bandeau défilant des entreprises -->
-<section id="ticker-banner" style="background-color: #F7F3E9; border-top: 2px solid #E67E35; overflow: hidden; white-space: nowrap; width: 100%;">
-  <div id="ticker-title" style="display: inline-block; padding: 10px 20px; color: #6F795C; font-weight: bold;">
+<!-- Bandeau défilant entreprise -->
+<section id="ticker-banner" style="background-color: #F7F3E9; border-top: 4px solid #E67E35; border-bottom: 4px solid #E67E35; width: 100%; padding: 8px 0; overflow: hidden; position: relative;">
+  <div style="color: #6F795C; font-weight: bold; padding-left: 20px; font-size: 0.95rem;">
     🟠 Les entreprises ayant rejoint la communauté Ré-GE-Nère :
   </div>
-  <div id="ticker-content" style="display: inline-block; animation: tickerScroll 60s linear infinite; color: #6D775A; font-weight: 500;"></div>
+  <div id="ticker-wrapper" style="overflow: hidden; width: 100%;">
+    <div id="ticker-content" style="display: inline-block; white-space: nowrap; animation: tickerScroll 25s linear infinite; color: #6D775A; font-weight: 500; font-size: 0.9rem; padding-left: 20px;"></div>
+  </div>
 </section>
 
 <style>
@@ -781,7 +783,7 @@ async function loadTickerData() {
     const names = data.records.map(record => record.fields["Nom de l’entreprise"]).filter(Boolean);
     tickerContent.innerHTML = names.map(name => `👤 ${name}`).join(" ‒ ");
   } catch (err) {
-    console.error("❌ Erreur lors du chargement du bandeau entreprises :", err);
+    console.error("❌ Erreur lors du chargement des entreprises :", err);
   }
 }
 
