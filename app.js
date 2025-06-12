@@ -125,11 +125,6 @@ function envoyerDonneesAMake(companyData) {
     });
 }
 
-function computeSemanticScore(desc1, desc2) {
-    // Pour l’instant, on simule un score aléatoire
-    return Math.random();
-}
-
 // Lancer l'initialisation quand le DOM est chargé
 document.addEventListener('DOMContentLoaded', () => {
     fetchAirtableData();
