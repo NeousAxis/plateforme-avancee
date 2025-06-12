@@ -618,43 +618,46 @@
     function openLoginModal() {
         document.getElementById('loginModal').style.display = 'flex';
     }
+
     // Fonction pour fermer la modal de connexion
     function closeLoginModal() {
         document.getElementById('loginModal').style.display = 'none';
     }
+
     // Fonction pour faire défiler jusqu'au formulaire d'inscription
     function scrollToRegistration() {
         document.getElementById('registration').scrollIntoView({ behavior: 'smooth' });
     }
-    // Fonction pour gérer la connexion utilisateu<script>
-function loginUser() {
-    const email = document.getElementById('login-email').value;
 
-    if (!email) {
-        showNotification('Veuillez entrer votre email professionnel.', 'error');
-        return;
+    // Fonction pour gérer la connexion utilisateur
+    function loginUser() {
+        const email = document.getElementById('login-email').value;
+
+        if (!email) {
+            showNotification('Veuillez entrer votre email professionnel.', 'error');
+            return;
+        }
+
+        const companies = JSON.parse(localStorage.getItem('regenere_companies') || '[]');
+        const company = companies.find(comp => comp.email === email);
+
+        if (company) {
+            showNotification('Connexion réussie! Bienvenue ' + company.name, 'success');
+            closeLoginModal();
+
+            document.getElementById('auth-status').innerHTML = `
+                <div style="color: white; text-align: right;">
+                    <div>Connecté en tant que:</div>
+                    <div style="font-weight: bold;">${company.name}</div>
+                    <button class="submit-btn" style="margin-top: 5px;" onclick="logoutUser()">Déconnexion</button>
+                </div>
+            `;
+        } else {
+            showNotification('Email non reconnu. Veuillez vous inscrire.', 'error');
+        }
     }
-
-    const companies = JSON.parse(localStorage.getItem('regenere_companies') || '[]');
-    const company = companies.find(comp => comp.email === email);
-
-    if (company) {
-        showNotification('Connexion réussie! Bienvenue ' + company.name, 'success');
-        closeLoginModal();
-
-        document.getElementById('auth-status').innerHTML = `
-            <div style="color: white; text-align: right;">
-                <div>Connecté en tant que:</div>
-                <div style="font-weight: bold;">${company.name}</div>
-                <button class="submit-btn" style="margin-top: 5px;" onclick="logoutUser()">Déconnexion</button>
-            </div>
-        `;
-    } else {
-        showNotification('Email non reconnu. Veuillez vous inscrire.', 'error');
-    }
-}
 </script>
-
+    
     <nav>
         <div class="container">
             <ul>
