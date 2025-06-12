@@ -137,7 +137,3 @@ function computeSemanticScore(desc1, desc2) {
 document.addEventListener('DOMContentLoaded', () => {
     fetchAirtableData();
 });
-document.addEventListener('DOMContentLoaded', function () {
-  fetchAirtableData();
-  console.log("Chargement des données Airtable...");
-});
