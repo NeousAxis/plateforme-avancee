@@ -2,7 +2,7 @@ import { computeSemanticScore } from './ai/matchingIA.js';
 
 const airtableApiKey = 'patDeduCdDLw16q41.8116fea5e72f5cbce467f46297ba4f4c40014c5bcd267046b910a3da5b4814a1';
 const airtableBaseId = 'appNP1LL1RkTdwVrT';
-const airtableTableName = 'ENTREPRISES'; // À ajuster si besoin
+const airtableTableName = 'ENTREPRISES';
 
 function registerCompany() {
     const companyName = document.getElementById('company-name').value;
@@ -26,8 +26,26 @@ function registerCompany() {
         needsDescription: companyNeedsDescription
     };
 
-    envoyerDonneesAMake(companyData);
-    console.log("Données d'entreprise:", companyData);
+    Promise.all([
+        sendRegistrationEmail(companyData),
+        envoyerDonneesAMake(companyData)
+    ])
+    .then(() => {
+        showNotification('Inscription réussie! Bienvenue dans l\'écosystème Ré(GE)nère.', 'success');
+    })
+    .catch(error => {
+        console.error("❌ Erreur lors de l'inscription :", error);
+        showNotification("Une erreur est survenue. Merci de réessayer.", "error");
+    });
+}
+
+function sendRegistrationEmail(companyData) {
+    const templateParams = {
+        to_email: companyData.email,
+        to_name: companyData.name,
+        message: `Merci de vous être inscrit à Ré(GE)nère!`
+    };
+    return emailjs.send('service_n485hr9', 'template_zm00bwr', templateParams);
 }
 
 async function fetchAirtableData() {
@@ -38,10 +56,7 @@ async function fetchAirtableData() {
             }
         });
 
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP ${response.status}`);
-        }
-
+        if (!response.ok) throw new Error(`Erreur HTTP ${response.status}`);
         const data = await response.json();
         console.log('Données Airtable :', data.records);
 
@@ -95,7 +110,6 @@ async function fetchAirtableData() {
 
 function envoyerDonneesAMake(companyData) {
     const webhookUrl = 'https://hook.eu2.make.com/x38i6elzcm3c3fr6u8ps6fqodhrb56t1';
-
     const dataToSend = {
         "Nom de l’entreprise": companyData.name,
         "Adresse": companyData.address,
@@ -107,25 +121,19 @@ function envoyerDonneesAMake(companyData) {
         "Description Besoins": companyData.needsDescription
     };
 
-    fetch(webhookUrl, {
+    return fetch(webhookUrl, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSend)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur lors de l\'envoi des données à Make.');
-        }
-        console.log('Données envoyées à Make avec succès.');
+    .then(res => {
+        console.log("📬 Données envoyées à Make :", res.status);
+        return res.text();
     })
-    .catch(error => {
-        console.error('Erreur lors de l\'envoi des données à Make:', error);
-    });
+    .then(txt => console.log("📦 Réponse Make :", txt))
+    .catch(error => console.error("❌ Erreur webhook Make :", error));
 }
 
-// Lancer l'initialisation quand le DOM est chargé
 document.addEventListener('DOMContentLoaded', () => {
     fetchAirtableData();
     console.log("Chargement des données Airtable...");
