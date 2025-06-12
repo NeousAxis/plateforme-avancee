@@ -26,17 +26,9 @@ function registerCompany() {
         needsDescription: companyNeedsDescription
     };
 
-    Promise.all([
-        sendRegistrationEmail(companyData),
-        envoyerDonneesAMake(companyData)
-    ])
-    .then(() => {
-        showNotification('Inscription réussie! Bienvenue dans l\'écosystème Ré(GE)nère.', 'success');
-    })
-    .catch(error => {
-        console.error("❌ Erreur lors de l'inscription :", error);
-        showNotification("Une erreur est survenue. Merci de réessayer.", "error");
-    });
+    sendRegistrationEmail(companyData);
+    envoyerDonneesAMake(companyData);
+    showNotification('Inscription réussie! Bienvenue dans l\'écosystème Ré(GE)nère.', 'success');
 }
 
 function sendRegistrationEmail(companyData) {
@@ -73,38 +65,36 @@ async function fetchAirtableData() {
         grid.className = 'matches-grid';
 
         data.records
-    .sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime))
-    .slice(0, 6)
-    .forEach(record => {
+            .sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime))
+            .slice(0, 6)
+            .forEach(record => {
+                const fields = record.fields;
+                const card = document.createElement('div');
+                card.className = 'match-card';
 
-            const fields = record.fields;
-
-            const card = document.createElement('div');
-            card.className = 'match-card';
-
-            const cardContent = `
-                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                    <span style="background-color: #E67E35; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Match</span>
-                    <span style="color: #6F795C; font-size: 0.9rem;">${new Date(record.createdTime).toLocaleDateString()}</span>
-                </div>
-                <h3 style="margin-top: 0; color: #6F795C; margin-bottom: 15px;">Catégorie: ${fields["Catégorie"] || 'N/A'}</h3>
-                <div style="margin-bottom: 15px;">
-                    <div style="font-weight: bold; color: #E67E35;">Fournisseur</div>
-                    <div>${fields["Fournisseur"] || 'N/A'}</div>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <div style="font-weight: bold; color: #6D775A;">Receveur</div>
-                    <div>${fields["Receveur"] || 'N/A'}</div>
-                </div>
-                <hr style="border: 0; height: 1px; background-color: #E0D0B8; margin: 15px 0;">
-                <div style="font-size: 0.9rem; color: #6F795C;">
-                    <div>Ressource: <span style="font-style: italic;">${fields["Description Ressources"] || ''}</span></div>
-                    <div>Besoin: <span style="font-style: italic;">${fields["Description Besoins"] || ''}</span></div>
-                </div>
-            `;
-            card.innerHTML = cardContent;
-            grid.appendChild(card);
-        });
+                const cardContent = `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <span style="background-color: #E67E35; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Match</span>
+                        <span style="color: #6F795C; font-size: 0.9rem;">${new Date(record.createdTime).toLocaleDateString()}</span>
+                    </div>
+                    <h3 style="margin-top: 0; color: #6F795C; margin-bottom: 15px;">Catégorie: ${fields["Catégorie"] || 'N/A'}</h3>
+                    <div style="margin-bottom: 15px;">
+                        <div style="font-weight: bold; color: #E67E35;">Fournisseur</div>
+                        <div>${fields["Fournisseur"] || 'N/A'}</div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <div style="font-weight: bold; color: #6D775A;">Receveur</div>
+                        <div>${fields["Receveur"] || 'N/A'}</div>
+                    </div>
+                    <hr style="border: 0; height: 1px; background-color: #E0D0B8; margin: 15px 0;">
+                    <div style="font-size: 0.9rem; color: #6F795C;">
+                        <div>Ressource: <span style="font-style: italic;">${fields["Description Ressources"] || ''}</span></div>
+                        <div>Besoin: <span style="font-style: italic;">${fields["Description Besoins"] || ''}</span></div>
+                    </div>
+                `;
+                card.innerHTML = cardContent;
+                grid.appendChild(card);
+            });
 
         container.appendChild(grid);
     } catch (error) {
@@ -144,11 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAirtableData();
     console.log("Chargement des données Airtable...");
 
-    // ✅ RELIER LE BOUTON AU JS
     const submitBtn = document.getElementById('submit-button');
     if (submitBtn) {
         submitBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // empêche un reload éventuel
+            e.preventDefault();
             registerCompany();
         });
     }
