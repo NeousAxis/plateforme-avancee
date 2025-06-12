@@ -12,9 +12,8 @@ function registerCompany() {
     const companyWebsite = document.getElementById('company-website').value;
     const companyEmail = document.getElementById('company-email').value;
 
-    // Champs supplémentaires pour ressources et besoins
-    const companyResourceDescription = document.getElementById('resource-description') ? document.getElementById('resource-description').value : "";
-    const companyNeedsDescription = document.getElementById('needs-description') ? document.getElementById('needs-description').value : "";
+    const companyResourceDescription = document.getElementById('resource-description')?.value || "";
+    const companyNeedsDescription = document.getElementById('needs-description')?.value || "";
 
     const companyData = {
         name: companyName,
@@ -27,13 +26,10 @@ function registerCompany() {
         needsDescription: companyNeedsDescription
     };
 
-    // 🚀 Envoi des données à Make
     envoyerDonneesAMake(companyData);
-
-    // Ensuite, ton code existant (console log par exemple)
     console.log("Données d'entreprise:", companyData);
+}
 
-    // Affiche les données Airtable après envoi
 async function fetchAirtableData() {
     try {
         const response = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/${airtableTableName}`, {
@@ -49,7 +45,6 @@ async function fetchAirtableData() {
         const data = await response.json();
         console.log('Données Airtable :', data.records);
 
-        // Vérifier si le conteneur existe déjà
         let container = document.getElementById('matches-section');
         if (!container) {
             container = document.createElement('section');
@@ -57,13 +52,14 @@ async function fetchAirtableData() {
             container.className = 'matches';
             document.body.appendChild(container);
         }
-        container.innerHTML = ''; // Vider le conteneur
 
+        container.innerHTML = '';
         const grid = document.createElement('div');
         grid.className = 'matches-grid';
 
         data.records.forEach(record => {
             const fields = record.fields;
+
             const card = document.createElement('div');
             card.className = 'match-card';
 
@@ -128,13 +124,14 @@ function envoyerDonneesAMake(companyData) {
         console.error('Erreur lors de l\'envoi des données à Make:', error);
     });
 }
+
 function computeSemanticScore(desc1, desc2) {
     // Pour l’instant, on simule un score aléatoire
     return Math.random();
 }
-    
-// Charger les données Airtable au chargement de la page
+
+// Lancer l'initialisation quand le DOM est chargé
 document.addEventListener('DOMContentLoaded', () => {
     fetchAirtableData();
+    console.log("Chargement des données Airtable...");
 });
-    
