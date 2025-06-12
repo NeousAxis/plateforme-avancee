@@ -72,7 +72,11 @@ async function fetchAirtableData() {
         const grid = document.createElement('div');
         grid.className = 'matches-grid';
 
-        data.records.forEach(record => {
+        data.records
+    .sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime))
+    .slice(0, 6)
+    .forEach(record => {
+
             const fields = record.fields;
 
             const card = document.createElement('div');
