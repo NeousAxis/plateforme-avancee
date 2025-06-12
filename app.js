@@ -143,4 +143,13 @@ function envoyerDonneesAMake(companyData) {
 document.addEventListener('DOMContentLoaded', () => {
     fetchAirtableData();
     console.log("Chargement des données Airtable...");
+
+    // ✅ RELIER LE BOUTON AU JS
+    const submitBtn = document.getElementById('submit-button');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // empêche un reload éventuel
+            registerCompany();
+        });
+    }
 });
