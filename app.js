@@ -104,6 +104,7 @@ async function fetchAirtableData() {
 
 function envoyerDonneesAMake(companyData) {
     const webhookUrl = 'https://hook.eu2.make.com/x38i6elzcm3c3fr6u8ps6fqodhrb56t1';
+
     const dataToSend = {
         "Nom de l’entreprise": companyData.name,
         "Adresse": companyData.address,
@@ -111,8 +112,18 @@ function envoyerDonneesAMake(companyData) {
         "Ville": companyData.city,
         "Email": companyData.email,
         "Site web": companyData.website,
-        "Description Ressources": companyData.resourceDescription,
-        "Description Besoins": companyData.needsDescription
+        "Catégorie d’entreprise": companyData.category,
+        "Description Ressources": companyData.resources.description,
+        "Ressources - Catégories": companyData.resources.categories.join(', '),
+        "Ressources - Fréquence": companyData.resources.frequency,
+        "Ressources - Mode": companyData.resources.mode,
+        "Ressources - Expertise": companyData.resources.expertise,
+        "Description Besoins": companyData.needs.description,
+        "Besoins - Catégories": companyData.needs.categories.join(', '),
+        "Besoins - Fréquence": companyData.needs.frequency,
+        "Besoins - Mode": companyData.needs.mode,
+        "Besoins - Expertise": companyData.needs.expertise,
+        "Préférences de notification": companyData.notificationPreferences
     };
 
     console.log("📡 Envoi vers Make :", JSON.stringify(dataToSend));
