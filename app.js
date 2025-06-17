@@ -1,7 +1,7 @@
 import { computeSemanticScore } from './ai/matchingIA.js';
 
 const airtableApiKey = 'patuYYQbAWqonAbQd.385aaa716c3620bcd491348141d5c53f3890e4793ef3b0a866a25d149e5af63b';
-const airtableBaseId = 'appNP1LL1RkTdwVrT';
+const airtableBaseId = 'appS7oarBsflokeib';
 const airtableTableName = 'ENTREPRISES';
 
 function registerCompany() {
