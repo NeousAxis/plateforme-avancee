@@ -71,7 +71,7 @@ async function fetchAirtableData() {
                 const fields = record.fields;
                 const card = document.createElement('div');
                 card.className = 'match-card';
-                const score = fields["Score"] || 'N/A';
+                const score = (fields && fields["Score"] !== undefined) ? fields["Score"] : 'Non disponible';
 
                 const cardContent = `
     <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
