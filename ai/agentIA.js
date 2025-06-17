@@ -11,7 +11,7 @@ app.use(express.json());
 
 const apiKey = process.env.OPENAI_API_KEY;
 const endpoint = 'https://api.openai.com/v1/embeddings';
-const model = 'text-embedding-ada-002';
+const model = 'text-embedding-3-small';
 
 // Fonction pour obtenir l'embedding d'un texte (avec gestion des erreurs détaillées)
 async function getEmbedding(text) {
