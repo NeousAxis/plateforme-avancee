@@ -105,11 +105,11 @@ function sendRegistrationEmail(companyData) {
 // ✅ Affichage dynamique des matchs (depuis Airtable)
 async function fetchAirtableData() {
     try {
-        const response = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/MATCHS`, {
-            headers: {
-                Authorization: `Bearer ${airtableApiKey}`
-            }
-        });
+        const response = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/ENTREPRISES`, {
+    headers: {
+        Authorization: `Bearer ${airtableApiKey}`
+    }
+});
 
         if (!response.ok) throw new Error(`Erreur HTTP ${response.status}`);
         const data = await response.json();
