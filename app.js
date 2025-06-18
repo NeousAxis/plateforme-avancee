@@ -27,10 +27,10 @@ function registerCompany() {
     };
 
     sendRegistrationEmail(companyData);
-    fetch(`https://api.airtable.com/v0/appNP1LL1RkTdwVrT/ENTREPRISES`, {
+    fetch(`https://api.airtable.com/v0/appS7oarBsflokeib/tblw8SLnbBjBnIAbX`, {
     method: 'POST',
     headers: {
-        'Authorization': 'Bearer patDeduCdDLw16q41.8116fea5e72f5cbce467f46297ba4f4c40014c5bcd267046b910a3da5b4814a1',
+        'Authorization': 'Bearer patuYYQbAWqonAbQd.385aaa716c3620bcd491348141d5c53f3890e4793ef3b0a866a25d149e5af63b',
         'Content-Type': 'application/json'
     },
     body: JSON.stringify({
