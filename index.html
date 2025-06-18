@@ -1532,9 +1532,8 @@ fetch(`https://api.airtable.com/v0/appS7oarBsflokeib/${airtableTableName}`, {
     console.log("✅ Données enregistrées dans Airtable :", data);
 })
 .catch(error => {
-    console.error("❌ Erreur Airtable :", error);
+    console.error("❌ Erreur lors de l'envoi vers Airtable :", error);
 });
-
             
             // Simuler une réponse réussie
             showNotification('Inscription réussie! Bienvenue dans l\'écosystème Ré(GE)nère.', 'success');
