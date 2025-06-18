@@ -1498,7 +1498,7 @@ function addResourceCategory() {
             console.log("Données d'entreprise:", companyData);
             
             // Envoi à Airtable
-fetch(`https://api.airtable.com/v0/appS7oarBsflokeib/ENTREPRISES`, {
+fetch(`https://api.airtable.com/v0/appS7oarBsflokeib/${airtableTableName}`, {
     method: 'POST',
     headers: {
         'Authorization': 'Bearer patuYYQbAWqonAbQd.385aaa716c3620bcd491348141d5c53f3890e4793ef3b0a866a25d149e5af63b',
