@@ -180,7 +180,8 @@ function showNotification(message, type) {
 // ✅ Initialisation au chargement du site
 document.addEventListener('DOMContentLoaded', () => {
     fetchAirtableData();
-    console.log("Chargement des données MATCHS Airtable...");
+    console.log("Chargement des données ENTREPRISES depuis Airtable...");
+});
 
     const submitBtn = document.getElementById('submit-button');
     if (submitBtn) {
