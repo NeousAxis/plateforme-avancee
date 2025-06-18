@@ -27,7 +27,42 @@ function registerCompany() {
     };
 
     sendRegistrationEmail(companyData);
-    envoyerDonneesAMake(companyData);
+    fetch(`https://api.airtable.com/v0/appNP1LL1RkTdwVrT/ENTREPRISES`, {
+    method: 'POST',
+    headers: {
+        'Authorization': 'Bearer patDeduCdDLw16q41.8116fea5e72f5cbce467f46297ba4f4c40014c5bcd267046b910a3da5b4814a1',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        fields: {
+            "Nom de l’entreprise": companyData.name,
+            "Adresse": companyData.address,
+            "Code postal": companyData.postalCode,
+            "Ville": companyData.city,
+            "Email": companyData.email,
+            "Site web": companyData.website,
+            "Catégorie d’entreprise": companyData.category,
+            "Description Ressources": companyData.resources.description,
+            "Ressources - Catégories": companyData.resources.categories.join(', '),
+            "Ressources - Fréquence": companyData.resources.frequency,
+            "Ressources - Mode": companyData.resources.mode,
+            "Ressources - Expertise": companyData.resources.expertise,
+            "Description Besoins": companyData.needs.description,
+            "Besoins - Catégories": companyData.needs.categories.join(', '),
+            "Besoins - Fréquence": companyData.needs.frequency,
+            "Besoins - Mode": companyData.needs.mode,
+            "Besoins - Expertise": companyData.needs.expertise,
+            "Préférences de notification": companyData.notificationPreferences
+        }
+    })
+})
+.then(response => response.json())
+.then(data => {
+    console.log("✅ Données enregistrées dans Airtable :", data);
+})
+.catch(error => {
+    console.error("❌ Erreur Airtable :", error);
+});
     showNotification('Inscription réussie! Bienvenue dans l\'écosystème Ré(GE)nère.', 'success');
 }
 
