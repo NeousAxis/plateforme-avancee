@@ -103,17 +103,19 @@ function sendRegistrationEmail(companyData) {
 }
 
 // ✅ Affichage dynamique des matchs (depuis Airtable)
+
+// ✅ Affichage dynamique des matchs (depuis Airtable)
 async function fetchAirtableData() {
     try {
-        fetch(`https://api.airtable.com/v0/${airtableBaseId}/tblw8SLnbBjBnIAbX`, {
-    headers: {
-        Authorization: `Bearer ${airtableApiKey}`
-    }
-});
+        const response = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/tblw8SLnbBjBnIAbX`, {
+            headers: {
+                Authorization: `Bearer ${airtableApiKey}`
+            }
+        });
 
         if (!response.ok) throw new Error(`Erreur HTTP ${response.status}`);
         const data = await response.json();
-        console.log('📦 Données MATCHS :', data.records);
+        console.log('📦 Données ENTREPRISES :', data.records);
 
         let container = document.getElementById('matches-section');
         if (!container) {
@@ -137,17 +139,17 @@ async function fetchAirtableData() {
 
                 const cardContent = `
                     <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                        <span style="background-color: #E67E35; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Match</span>
+                        <span style="background-color: #E67E35; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Entreprise</span>
                         <span style="color: #6F795C; font-size: 0.9rem;">${new Date(record.createdTime).toLocaleDateString()}</span>
                     </div>
-                    <h3 style="margin-top: 0; color: #6F795C; margin-bottom: 15px;">Catégorie: ${fields["Catégorie"] || 'N/A'}</h3>
+                    <h3 style="margin-top: 0; color: #6F795C; margin-bottom: 15px;">Catégorie: ${fields["Catégorie d’entreprise"] || 'N/A'}</h3>
                     <div style="margin-bottom: 15px;">
-                        <div style="font-weight: bold; color: #E67E35;">Fournisseur</div>
-                        <div>${fields["Fournisseur"] || 'N/A'}</div>
+                        <div style="font-weight: bold; color: #E67E35;">Nom</div>
+                        <div>${fields["Nom de l’entreprise"] || 'N/A'}</div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <div style="font-weight: bold; color: #6D775A;">Receveur</div>
-                        <div>${fields["Receveur"] || 'N/A'}</div>
+                        <div style="font-weight: bold; color: #6D775A;">Ville</div>
+                        <div>${fields["Ville"] || 'N/A'}</div>
                     </div>
                     <hr style="border: 0; height: 1px; background-color: #E0D0B8; margin: 15px 0;">
                     <div style="font-size: 0.9rem; color: #6F795C;">
@@ -161,7 +163,7 @@ async function fetchAirtableData() {
 
         container.appendChild(grid);
     } catch (error) {
-        console.error('❌ Erreur Airtable MATCHS :', error);
+        console.error('❌ Erreur Airtable ENTREPRISES :', error);
     }
 }
 
