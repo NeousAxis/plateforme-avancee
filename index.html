@@ -1703,7 +1703,9 @@ function displayMatches() {
         <div class="match-card">
           <div class="match-header">
             <span class="match-badge">Match</span>
-            <span class="match-date">${new Date(match.date).toLocaleDateString()}</span>
+            <span style="color: #6F795C; font-size: 0.9rem;">
+              ${new Date(fields["Date du match"]).toLocaleDateString('fr-CH')}
+            </span>
           </div>
           <h3 class="match-category">Catégorie: ${match.resourceCategory}</h3>
           <div class="match-section">
