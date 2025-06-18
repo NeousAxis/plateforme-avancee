@@ -1497,6 +1497,45 @@ function addResourceCategory() {
             // Ici, vous pouvez envoyer les données à votre serveur ou les traiter localement
             console.log("Données d'entreprise:", companyData);
             
+            // Envoi à Airtable
+fetch(`https://api.airtable.com/v0/appS7oarBsflokeib/ENTREPRISES`, {
+    method: 'POST',
+    headers: {
+        'Authorization': 'Bearer patuYYQbAWqonAbQd.385aaa716c3620bcd491348141d5c53f3890e4793ef3b0a866a25d149e5af63b',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        fields: {
+            "Nom de l’entreprise": companyData.name,
+            "Adresse": companyData.address,
+            "Code postal": companyData.postalCode,
+            "Ville": companyData.city,
+            "Email": companyData.email,
+            "Site web": companyData.website,
+            "Catégorie d’entreprise": companyData.category,
+            "Description Ressources": companyData.resources.description,
+            "Ressources - Catégories": companyData.resources.categories.join(', '),
+            "Ressources - Fréquence": companyData.resources.frequency,
+            "Ressources - Mode": companyData.resources.mode,
+            "Ressources - Expertise": companyData.resources.expertise,
+            "Description Besoins": companyData.needs.description,
+            "Besoins - Catégories": companyData.needs.categories.join(', '),
+            "Besoins - Fréquence": companyData.needs.frequency,
+            "Besoins - Mode": companyData.needs.mode,
+            "Besoins - Expertise": companyData.needs.expertise,
+            "Préférences de notification": companyData.notificationPreferences
+        }
+    })
+})
+.then(response => response.json())
+.then(data => {
+    console.log("✅ Données enregistrées dans Airtable :", data);
+})
+.catch(error => {
+    console.error("❌ Erreur Airtable :", error);
+});
+
+            
             // Simuler une réponse réussie
             showNotification('Inscription réussie! Bienvenue dans l\'écosystème Ré(GE)nère.', 'success');
             
