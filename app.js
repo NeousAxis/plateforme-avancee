@@ -105,8 +105,6 @@ function sendRegistrationEmail(companyData) {
 }
 
 // ✅ Affichage dynamique des matchs (depuis Airtable)
-
-// ✅ Affichage dynamique des matchs (depuis Airtable)
 async function fetchAirtableData() {
     try {
         const response = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/${airtableMatchesTableId}`, {
