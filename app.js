@@ -187,7 +187,6 @@ function showNotification(message, type) {
 document.addEventListener('DOMContentLoaded', () => {
     fetchAirtableData();
     console.log("Chargement des données ENTREPRISES depuis Airtable...");
-});
 
     const submitBtn = document.getElementById('submit-button');
     if (submitBtn) {
